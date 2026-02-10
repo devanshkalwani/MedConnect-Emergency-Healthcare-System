@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hospital Command Center</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+display:flex;
+background:#f6fbff;
+}
+
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+
+width:250px;
+height:100vh;
+
+background:white;
+border-right:1px solid #e2e8f0;
+
+padding:25px;
+position:fixed;
+}
+
+
+/* LOGO */
+
+.sidebar img{
+height:40px;
+margin-bottom:40px;
+}
+
+
+/* MENU */
+
+.menu a{
+
+display:block;
+text-decoration:none;
+color:#334155;
+
+padding:12px;
+border-radius:10px;
+margin-top:10px;
+
+transition:.2s;
+}
+
+.menu a:hover{
+background:#e0f2fe;
+color:#0284c7;
+}
+
+
+
+/* ================= MAIN ================= */
+
+.main{
+
+margin-left:250px;
+padding:40px;
+width:100%;
+}
+
+
+/* HEADER */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.header h1{
+color:#0f172a;
+}
+
+.status{
+
+background:#dc2626;
+color:white;
+
+padding:8px 16px;
+border-radius:20px;
+
+font-weight:600;
+}
+
+
+/* ================= ALERT CARD ================= */
+
+.alert{
+
+margin-top:30px;
+
+background:#fee2e2;
+border-left:6px solid #dc2626;
+
+padding:25px;
+border-radius:14px;
+}
+
+.alert h2{
+color:#991b1b;
+}
+
+
+/* ================= GRID ================= */
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+
+margin-top:30px;
+}
+
+.card{
+
+background:white;
+padding:25px;
+
+border-radius:16px;
+
+box-shadow:0 8px 25px rgba(2,6,23,.05);
+}
+
+.card h3{
+margin-bottom:8px;
+}
+
+
+/* ================= TABLE ================= */
+
+table{
+
+width:100%;
+margin-top:25px;
+
+background:white;
+border-radius:14px;
+overflow:hidden;
+
+box-shadow:0 8px 25px rgba(2,6,23,.05);
+}
+
+th,td{
+padding:16px;
+text-align:left;
+}
+
+th{
+background:#e0f2fe;
+}
+
+tr:nth-child(even){
+background:#f8fafc;
+}
+
+</style>
+</head>
+
+
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<img src="../images/medconnect-logo.png">
+
+<div class="menu">
+
+<a href="#">Dashboard</a>
+<a href="#">Emergency Alerts</a>
+<a href="#">Patients Incoming</a>
+<a href="#">Bed Availability</a>
+<a href="#">Doctors On Duty</a>
+<a href="#">Settings</a>
+
+</div>
+
+</div>
+
+
+
+<!-- MAIN -->
+
+<div class="main">
+
+<div class="header">
+
+<h1>Hospital Emergency Command</h1>
+
+<div class="status">
+HIGH ALERT
+</div>
+
+</div>
+
+
+
+<!-- LIVE ALERT -->
+
+<div class="alert">
+
+<h2>🚨 Incoming Cardiac Emergency</h2>
+
+<p>
+Patient arriving in <b>6 minutes</b>.  
+Age: 58 | Blood Group: O+  
+Condition: Suspected Heart Attack
+</p>
+
+</div>
+
+
+
+<!-- QUICK STATS -->
+
+<div class="grid">
+
+<div class="card">
+<h3>Available ICU Beds</h3>
+<h1>4</h1>
+</div>
+
+<div class="card">
+<h3>Doctors On Duty</h3>
+<h1>12</h1>
+</div>
+
+<div class="card">
+<h3>Ambulances Active</h3>
+<h1>3</h1>
+</div>
+
+</div>
+
+
+
+<!-- INCOMING TABLE -->
+
+<table>
+
+<tr>
+<th>Patient</th>
+<th>Condition</th>
+<th>ETA</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>Raj Sharma</td>
+<td>Cardiac Arrest</td>
+<td>6 mins</td>
+<td>Critical</td>
+</tr>
+
+<tr>
+<td>Meena Patel</td>
+<td>Stroke</td>
+<td>12 mins</td>
+<td>High Priority</td>
+</tr>
+
+</table>
+
+</div>
+
+</body>
+</html>
