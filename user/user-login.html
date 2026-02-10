@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>User Login — MedConnect</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:#eaf4fb;
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+}
+
+/* CARD */
+
+.card{
+width:420px;
+background:white;
+padding:45px;
+border-radius:18px;
+box-shadow:0 15px 40px rgba(0,0,0,.08);
+text-align:center;
+}
+
+h2{
+margin-bottom:25px;
+font-size:28px;
+}
+
+input{
+width:100%;
+padding:16px;
+margin:10px 0;
+border-radius:10px;
+border:1px solid #cbd5e1;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:16px;
+margin-top:15px;
+border:none;
+border-radius:12px;
+background:#0284c7;
+color:white;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+}
+
+button:hover{
+background:#0369a1;
+}
+
+.link{
+margin-top:18px;
+font-size:16px;
+}
+
+a{
+color:#0284c7;
+text-decoration:none;
+font-weight:600;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Login to MedConnect</h2>
+
+<input type="email" placeholder="Email">
+<input type="password" placeholder="Password">
+
+<button onclick="location.href='dashboard.html'">
+Login
+</button>
+
+<div class="link">
+New user? <a href="user-register.html">Create Account</a>
+</div>
+
+</div>
+
+</body>
+</html>
