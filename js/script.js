@@ -1,76 +1,174 @@
+// ===============================
+// MEDCONNECT MAIN SCRIPT
+// ===============================
+
+// ===============================
+// SCROLL REVEAL ANIMATION
+// ===============================
+
 window.addEventListener("scroll", reveal);
+window.addEventListener("load", reveal);
 
-function reveal(){
+function reveal() {
 
-const elements = document.querySelectorAll(".reveal");
+    const elements = document.querySelectorAll(".reveal");
+    const windowHeight = window.innerHeight;
+    const revealPoint = 120;
 
-elements.forEach(el => {
+    elements.forEach(el => {
 
-const windowHeight = window.innerHeight;
-const elementTop = el.getBoundingClientRect().top;
-const revealPoint = 120;
+        const elementTop = el.getBoundingClientRect().top;
 
-if(elementTop < windowHeight - revealPoint){
-el.classList.add("active");
-}else{
-el.classList.remove("active");
+        if (elementTop < windowHeight - revealPoint) {
+            el.classList.add("active");
+        } else {
+            el.classList.remove("active");
+        }
+    });
+
+    revealTrust();
 }
 
-});
 
-revealTrust();
+// ===============================
+// TRUST SECTION SLIDE EFFECT
+// ===============================
+
+function revealTrust() {
+
+    const trustBoxes = document.querySelectorAll(".trust-box");
+    const windowHeight = window.innerHeight;
+    const triggerPoint = 330;
+
+    trustBoxes.forEach(box => {
+
+        const boxTop = box.getBoundingClientRect().top;
+
+        if (boxTop < windowHeight - triggerPoint) {
+            box.classList.add("show");
+        } else {
+            box.classList.remove("show");
+        }
+    });
 }
 
 
+// ===============================
+// DROPDOWN MENU FUNCTIONALITY
+// ===============================
 
-/* TRUST SLIDE FROM SIDES */
+function toggleDropdown(menuId) {
 
-function revealTrust(){
+    // Close other dropdowns first
+    document.querySelectorAll(".dropdown-content").forEach(menu => {
+        if (menu.id !== menuId) {
+            menu.classList.remove("show");
+        }
+    });
 
-const trustBoxes = document.querySelectorAll(".trust-box");
-
-trustBoxes.forEach(box => {
-
-const windowHeight = window.innerHeight;
-const boxTop = box.getBoundingClientRect().top;
-const triggerPoint = 330;
-
-if(boxTop < windowHeight - triggerPoint){
-box.classList.add("show");
-}else{
-box.classList.remove("show");
-}
-
-});
-
-}
-function toggleDropdown(menuId){
-
-// close other dropdowns
-document.querySelectorAll(".dropdown-content")
-.forEach(menu => {
-    if(menu.id !== menuId){
-        menu.classList.remove("show");
+    // Toggle selected dropdown
+    const menu = document.getElementById(menuId);
+    if (menu) {
+        menu.classList.toggle("show");
     }
+}
+
+
+// Close dropdown when clicking outside
+window.addEventListener("click", function (e) {
+
+    if (!e.target.closest(".dropdown")) {
+
+        document.querySelectorAll(".dropdown-content").forEach(menu => {
+            menu.classList.remove("show");
+        });
+    }
+
 });
 
-// toggle clicked one
-document.getElementById(menuId)
-.classList.toggle("show");
 
-}
+// ===============================
+// SMOOTH SCROLL FOR NAV LINKS
+// ===============================
 
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
-// close if clicking outside
-window.onclick = function(e){
+    anchor.addEventListener("click", function (e) {
 
-if(!e.target.matches('.dropbtn')){
+        const targetId = this.getAttribute("href");
 
-document.querySelectorAll(".dropdown-content")
-.forEach(menu=>{
-menu.classList.remove("show");
+        if (targetId.length > 1) {
+
+            e.preventDefault();
+
+            const target = document.querySelector(targetId);
+
+            if (target) {
+                target.scrollIntoView({
+                    behavior: "smooth"
+                });
+            }
+        }
+    });
 });
 
-}
 
-}
+// ===============================
+// ACTIVE NAV LINK ON SCROLL
+// ===============================
+
+window.addEventListener("scroll", function () {
+
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+
+        if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove("active");
+
+        if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+        }
+    });
+
+});
+
+
+// ===============================
+// PREVENT FORM EMPTY SUBMISSION (Optional)
+// ===============================
+
+document.querySelectorAll("form").forEach(form => {
+
+    form.addEventListener("submit", function (e) {
+
+        let valid = true;
+
+        this.querySelectorAll("input[required], textarea[required]").forEach(input => {
+            if (input.value.trim() === "") {
+                valid = false;
+                input.style.border = "1px solid red";
+            } else {
+                input.style.border = "";
+            }
+        });
+
+        if (!valid) {
+            e.preventDefault();
+            alert("Please fill all required fields.");
+        }
+
+    });
+
+});
