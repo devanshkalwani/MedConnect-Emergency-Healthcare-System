@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MedConnect — Emergency Intelligence</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+  <!-- LOGO -->
+  <div class="nav-brand">
+    <img src="images/medconnect-topleft-logo.png" class="logo-icon">
+    <div class="logo-text">Med<span>Connect</span></div>
+  </div>
+
+
+  <div class="nav-menu">
+
+    <a href="#">Home</a>
+    <a href="#how">How It Works</a>
+    <a href="#">Hospitals</a>
+    <a href="#">Emergency</a>
+
+
+    <!-- ABOUT -->
+    <div class="dropdown">
+      <button class="dropbtn" onclick="toggleDropdown('aboutMenu')">
+        About ▾
+      </button>
+
+      <div id="aboutMenu" class="dropdown-content">
+        <a href="#">About MedConnect</a>
+        <a href="#">Our Mission</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+
+
+
+    <!-- LOGIN -->
+    <div class="dropdown">
+      <button class="dropbtn login-btn" onclick="toggleDropdown('loginMenu')">
+        Login ▾
+      </button>
+
+      <div id="loginMenu" class="dropdown-content">
+        <a href="user/user-login.html">User Login</a>
+        <a href="hospital/hospital-login.html">Hospital Login</a>
+        <a href="admin/admin-login.html">Admin</a>
+      </div>
+    </div>
+
+  </div>
+
+</nav>
+
+
+
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+
+  <div class="hero-mesh"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+
+    <h1>
+      Emergency Response.<br>
+      <span>Prepared Before Arrival.</span>
+    </h1>
+
+    <p>
+      Built for critical moments when every second matters — MedConnect ensures
+      hospitals are informed, prepared, and ready before you even arrive.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#" class="btn-primary">Get Started</a>
+      <a href="#" class="btn-sos">🚨 Activate SOS</a>
+      <a href="#how" class="btn-outline">Learn More</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================= TRUST STRIP ================= -->
+<section class="trust">
+
+  <div class="trust-container">
+
+    <div class="trust-box left">
+      ✔ 500+ Hospitals Connected
+    </div>
+
+    <div class="trust-box right">
+      ✔ 24/7 Emergency Network
+    </div>
+
+    <div class="trust-box left">
+      ✔ Under 3 Minute Alert Time
+    </div>
+
+    <div class="trust-box right">
+      ✔ Trusted by Families Nationwide
+    </div>
+
+    <!-- NEW BLOCKS -->
+
+    <div class="trust-box left">
+      ✔ Secure & Encrypted Medical Data
+    </div>
+
+    <div class="trust-box right">
+      ✔ Built for Tier-2 & Tier-3 Cities
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= WHO MEDCONNECT HELPS ================= -->
+<section class="who">
+
+  <h2 class="section-title">Who MedConnect Helps</h2>
+
+  <div class="who-grid">
+
+    <div class="who-card">
+      <h3>👨‍👩‍👧 Families</h3>
+      <p>
+        Stay prepared for unexpected medical situations with instant access
+        to emergency-ready hospitals.
+      </p>
+    </div>
+
+    <div class="who-card">
+      <h3>👴 Elderly Living Alone</h3>
+      <p>
+        Rapid alerts ensure help is always within reach, providing independence
+        with safety.
+      </p>
+    </div>
+
+    <div class="who-card">
+      <h3>🏥 Hospitals</h3>
+      <p>
+        Receive critical patient data early so medical teams can prepare
+        life-saving treatment before arrival. 
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= HOW MEDCONNECT WORKS ================= -->
+<section class="how" id="how">
+
+  <h2 class="section-title">How MedConnect Works</h2>
+
+  <div class="how-grid">
+
+    <div class="how-card reveal">
+      <div class="icon">🚨</div>
+      <h3>Instant SOS Activation</h3>
+      <p>
+        One tap triggers the High Alert Protocol, instantly notifying nearby
+        hospitals and emergency services within seconds.
+      </p>
+    </div>
+
+    <div class="how-card reveal">
+      <div class="icon">📡</div>
+      <h3>Real-Time Data Transfer</h3>
+      <p>
+        Medical history, emergency details, and live location are securely
+        transmitted to hospitals so doctors can assess the situation in advance.
+      </p>
+    </div>
+
+    <div class="how-card reveal">
+      <div class="icon">⚕️</div>
+      <h3>Prepared Treatment</h3>
+      <p>
+        Hospitals are fully prepared when the patient arrives — eliminating
+        paperwork delays and accelerating life-saving intervention.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= WHY MEDCONNECT ================= -->
+<section class="why">
+
+  <h2 class="section-title">Why MedConnect?</h2>
+
+  <div class="why-grid">
+
+    <div class="why-card reveal">
+      <h3>⚡ Lightning Fast Response</h3>
+      <p>
+        MedConnect drastically reduces emergency response time by instantly
+        connecting patients with nearby capable hospitals during critical situations.
+      </p>
+    </div>
+
+    <div class="why-card reveal">
+      <h3>🔐 Secure Medical Identity</h3>
+      <p>
+        Essential health data is securely shared with hospitals, enabling doctors
+        to make informed decisions even before the patient arrives.
+      </p>
+    </div>
+
+    <div class="why-card reveal">
+      <h3>🏥 Smart Hospital Matching</h3>
+      <p>
+        Patients are guided to hospitals equipped to handle their specific
+        emergency — not just the nearest one.
+      </p>
+    </div>
+
+    <div class="why-card reveal">
+      <h3>👴 Built for the Vulnerable</h3>
+      <p>
+        Designed especially for elderly individuals and high-risk users,
+        strengthening preparedness and providing reassurance to families.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= EMERGENCY NUMBERS ================= -->
+<section class="emergency">
+
+  <h2>National Emergency Numbers</h2>
+
+  <div class="numbers">
+    <div>🚑 Ambulance — 102 / 108</div>
+    <div>👮 Police — 100</div>
+    <div>🔥 Fire — 101</div>
+    <div>🚨 Disaster Management — 112</div>
+    <div>🩺 Health Helpline — 104</div>
+  </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+<footer>
+© 2026 MedConnect — Intelligent Emergency Infrastructure
+</footer>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

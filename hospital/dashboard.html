@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hospital Dashboard — MedConnect</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:#f1f7fc;
+}
+
+/* NAV */
+
+.nav{
+background:#0284c7;
+color:white;
+padding:20px 8%;
+font-size:22px;
+font-weight:700;
+}
+
+/* CONTAINER */
+
+.container{
+padding:60px 8%;
+text-align:center;
+}
+
+h1{
+font-size:32px;
+margin-bottom:40px;
+}
+
+/* ALERT */
+
+.alert{
+margin:30px auto;
+width:420px;
+padding:22px;
+background:#fee2e2;
+border-radius:16px;
+color:#991b1b;
+font-weight:600;
+}
+
+/* CARDS */
+
+.grid{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+margin-top:40px;
+}
+
+.card{
+width:260px;
+background:white;
+padding:30px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,.06);
+cursor:pointer;
+font-size:18px;
+font-weight:600;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+MedConnect Hospital Portal
+</div>
+
+<div class="container">
+
+<h1>Hospital Command Center</h1>
+
+<div class="alert">
+🚨 Incoming Emergency Alert
+</div>
+
+<div class="grid">
+
+<div class="card">
+Incoming Patients
+</div>
+
+<div class="card">
+Bed Availability
+</div>
+
+<div class="card">
+Doctors On Duty
+</div>
+
+<div class="card">
+Emergency History
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

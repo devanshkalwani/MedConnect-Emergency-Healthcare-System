@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hospital Registration — MedConnect</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:#eaf4fb;
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:100vh;
+padding:40px 0;
+}
+
+.card{
+width:480px;
+background:white;
+padding:40px;
+border-radius:18px;
+box-shadow:0 15px 40px rgba(0,0,0,.08);
+text-align:center;
+}
+
+.logo{
+height:55px;
+margin-bottom:15px;
+}
+
+h2{
+margin-bottom:20px;
+}
+
+input, select{
+width:100%;
+padding:14px;
+margin:8px 0;
+border-radius:10px;
+border:1px solid #cbd5e1;
+font-size:15px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:12px;
+background:#0284c7;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+}
+
+button:hover{
+background:#0369a1;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<img src="../images/medconnect-logo.png" class="logo">
+
+<h2>Register Hospital</h2>
+
+<input type="text" placeholder="Hospital Name">
+<input type="text" placeholder="Hospital ID">
+<input type="email" placeholder="Official Email">
+<input type="text" placeholder="Contact Number">
+<input type="text" placeholder="City">
+
+<select>
+<option>Hospital Type</option>
+<option>Government</option>
+<option>Private</option>
+<option>Multi-Speciality</option>
+</select>
+
+<input type="number" placeholder="Total Beds Available">
+<input type="number" placeholder="ICU Beds">
+<input type="password" placeholder="Create Password">
+
+<button onclick="location.href='hospital-login.html'">
+Register Hospital
+</button>
+
+</div>
+
+</body>
+</html>
