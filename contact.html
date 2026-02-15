@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contact MedConnect</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* BODY */
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#eef6fb,#e0eff9,#d7eaf7);
+color:#0f172a;
+}
+
+/* NAVBAR */
+
+.navbar{
+height:70px;
+display:flex;
+align-items:center;
+padding:0 40px;
+background:rgba(255,255,255,0.85);
+backdrop-filter:blur(12px);
+box-shadow:0 4px 25px rgba(0,0,0,0.05);
+}
+
+.back{
+text-decoration:none;
+color:#0369a1;
+font-weight:600;
+margin-right:20px;
+transition:0.2s;
+}
+
+.back:hover{
+color:#0284c7;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:60px 20px 30px;
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.hero p{
+color:#475569;
+font-size:17px;
+}
+
+/* CONTAINER */
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+}
+
+/* CARD */
+
+.card{
+background:rgba(255,255,255,0.75);
+backdrop-filter:blur(15px);
+padding:35px;
+border-radius:18px;
+box-shadow:0 15px 40px rgba(2,132,199,0.12);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 20px 50px rgba(2,132,199,0.18);
+}
+
+/* CONTACT INFO */
+
+.info-item{
+margin-bottom:20px;
+}
+
+.info-title{
+font-weight:600;
+color:#0369a1;
+margin-bottom:5px;
+}
+
+.info-value{
+color:#334155;
+}
+
+/* EMERGENCY BADGE */
+
+.emergency{
+background:linear-gradient(135deg,#dc2626,#ef4444);
+color:white;
+padding:6px 14px;
+border-radius:20px;
+display:inline-block;
+font-size:13px;
+margin-top:6px;
+}
+
+/* FORM */
+
+form{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+input,textarea{
+padding:12px;
+border-radius:10px;
+border:1px solid #cbd5e1;
+font-size:15px;
+outline:none;
+transition:0.2s;
+}
+
+input:focus,textarea:focus{
+border-color:#0284c7;
+box-shadow:0 0 0 2px rgba(2,132,199,0.15);
+}
+
+textarea{
+resize:none;
+height:120px;
+}
+
+/* BUTTON */
+
+button{
+background:linear-gradient(135deg,#0284c7,#0ea5e9);
+color:white;
+border:none;
+padding:12px;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+transition:0.25s;
+}
+
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 20px rgba(2,132,199,0.2);
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:30px;
+color:#64748b;
+}
+
+/* SUCCESS MESSAGE */
+
+.success{
+display:none;
+color:#16a34a;
+margin-top:10px;
+font-weight:500;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="navbar">
+<a href="index.html" class="back">← Back</a>
+<strong>MedConnect Emergency Contact Center</strong>
+</div>
+
+<div class="hero">
+<h1>Contact MedConnect</h1>
+<p>Emergency assistance and support available 24/7</p>
+</div>
+
+<div class="container">
+
+<!-- CONTACT INFO -->
+
+<div class="card">
+
+<h2>Emergency Contact Information</h2>
+
+<div class="info-item">
+<div class="info-title">Emergency Hotline</div>
+<div class="info-value">+91 9876543210</div>
+<div class="emergency">24/7 Emergency Priority Line</div>
+</div>
+
+<div class="info-item">
+<div class="info-title">Email Support</div>
+<div class="info-value">support@medconnect.com</div>
+</div>
+
+<div class="info-item">
+<div class="info-title">Operations Center</div>
+<div class="info-value">MedConnect Emergency Network, India</div>
+</div>
+
+<div class="info-item">
+<div class="info-title">Availability</div>
+<div class="info-value">24 hours, 7 days a week</div>
+</div>
+
+</div>
+
+<!-- CONTACT FORM -->
+
+<div class="card">
+
+<h2>Send Message</h2>
+
+<form onsubmit="submitForm(event)">
+
+<input type="text" placeholder="Full Name" required>
+
+<input type="email" placeholder="Email Address" required>
+
+<input type="text" placeholder="Phone Number">
+
+<textarea placeholder="Describe your issue or request..." required></textarea>
+
+<button type="submit">Send Message</button>
+
+<div class="success" id="successMsg">
+Message sent successfully. MedConnect team will contact you.
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 MedConnect Emergency Infrastructure
+</footer>
+
+<script>
+
+function submitForm(e){
+e.preventDefault();
+document.getElementById("successMsg").style.display="block";
+}
+
+</script>
+
+</body>
+</html>

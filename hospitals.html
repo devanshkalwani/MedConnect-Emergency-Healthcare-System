@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MedConnect Partner Hospitals</title>
+
+<style>
+
+/* GLOBAL */
+
+body{
+
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+background:linear-gradient(180deg,#f4f9fd,#e6f1f8);
+color:#0f172a;
+
+}
+
+/* NAVBAR */
+
+.navbar{
+
+height:70px;
+display:flex;
+align-items:center;
+padding:0 40px;
+background:white;
+box-shadow:0 2px 12px rgba(0,0,0,0.05);
+
+}
+
+.navbar img{
+
+height:38px;
+margin-right:10px;
+
+}
+
+.back{
+
+color:#0369a1;
+text-decoration:none;
+font-weight:600;
+margin-right:20px;
+
+}
+
+/* HEADER */
+
+.header{
+
+text-align:center;
+padding:50px 20px;
+
+}
+
+.header h1{
+
+font-size:34px;
+font-weight:700;
+color:#0f172a;
+
+}
+
+.header p{
+
+color:#475569;
+
+}
+
+/* GRID */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+
+gap:28px;
+
+padding:40px;
+
+align-items:stretch;
+
+}
+
+/* CARD */
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:14px;
+
+box-shadow:0 8px 24px rgba(2,132,199,0.08);
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:space-between;
+
+min-height:320px;
+
+transition:0.25s;
+
+}
+
+.card:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 14px 28px rgba(2,132,199,0.12);
+
+}
+
+/* TITLE */
+
+.card h2{
+
+margin-bottom:10px;
+
+font-size:20px;
+
+}
+
+/* TAGS */
+
+.tags{
+
+margin-bottom:10px;
+
+}
+
+.tags span{
+
+display:inline-block;
+
+background:#eef6fb;
+
+color:#0369a1;
+
+padding:5px 11px;
+
+border-radius:20px;
+
+margin-right:6px;
+
+margin-bottom:6px;
+
+font-size:12px;
+
+}
+
+/* STATUS */
+
+.status{
+
+align-self:flex-end;
+
+font-size:12px;
+
+padding:5px 12px;
+
+border-radius:20px;
+
+margin-bottom:10px;
+
+}
+
+.ready{
+
+background:#e7f7ee;
+
+color:#15803d;
+
+}
+
+.moderate{
+
+background:#fff7ed;
+
+color:#c2410c;
+
+}
+
+/* DETAILS */
+
+.details{
+
+color:#334155;
+
+font-size:14px;
+
+line-height:1.6;
+
+}
+
+/* BUTTON CONTAINER */
+
+.buttons{
+
+margin-top:auto;
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:10px;
+
+}
+
+/* BUTTON BASE */
+
+.btn{
+
+padding:9px 16px;
+
+border-radius:8px;
+
+text-decoration:none;
+
+font-size:13px;
+
+font-weight:600;
+
+white-space:nowrap;
+
+}
+
+/* WEBSITE BUTTON */
+
+.btn.website{
+
+background:#0369a1;
+
+color:white;
+
+}
+
+/* MAP BUTTON */
+
+.btn.map{
+
+background:#15803d;
+
+color:white;
+
+}
+
+/* CALL BUTTON */
+
+.btn.call{
+
+background:#dc2626;
+
+color:white;
+
+}
+
+/* BUTTON HOVER */
+
+.btn:hover{
+
+opacity:0.9;
+
+}
+
+/* FOOTER */
+
+footer{
+
+text-align:center;
+
+padding:30px;
+
+color:#64748b;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<a href="index.html" class="back">← Back</a>
+
+<img src="images/medconnect-logo.png">
+
+<strong>MedConnect Partner Hospitals</strong>
+
+</div>
+
+
+<div class="header">
+
+<h1>Partner Hospital Network</h1>
+
+<p>Verified emergency-ready hospitals connected with MedConnect</p>
+
+</div>
+
+
+<div class="grid">
+
+<!-- Apollo -->
+
+<div class="card">
+
+<div class="status ready">Emergency Ready</div>
+
+<h2>Apollo Emergency Center</h2>
+
+<div class="tags">
+<span>Cardiac</span>
+<span>Trauma</span>
+<span>ICU</span>
+</div>
+
+<div class="details">
+
+Capacity: 320 beds<br>
+ICU Beds Available: 12<br>
+Distance: 2.1 km
+
+</div>
+
+<div class="buttons">
+
+<a href="https://www.apollohospitals.com" target="_blank" class="btn website">
+Hospital Website
+</a>
+
+<a href="https://maps.google.com/?q=Apollo Hospital" target="_blank" class="btn map">
+View on Maps
+</a>
+
+<a href="tel:+911234567890" class="btn call">
+Call Hospital
+</a>
+
+</div>
+
+</div>
+
+
+<!-- Fortis -->
+
+<div class="card">
+
+<div class="status ready">Emergency Ready</div>
+
+<h2>Fortis Healthcare</h2>
+
+<div class="tags">
+<span>Emergency</span>
+<span>Neurology</span>
+<span>ICU</span>
+</div>
+
+<div class="details">
+
+Capacity: 280 beds<br>
+ICU Beds Available: 9<br>
+Distance: 3.5 km
+
+</div>
+
+<div class="buttons">
+
+<a href="https://www.fortishealthcare.com" target="_blank" class="btn website">
+Hospital Website
+</a>
+
+<a href="https://maps.google.com/?q=Fortis Hospital" target="_blank" class="btn map">
+View on Maps
+</a>
+
+<a href="tel:+911234567891" class="btn call">
+Call Hospital
+</a>
+
+</div>
+
+</div>
+
+
+<!-- AIIMS -->
+
+<div class="card">
+
+<div class="status moderate">Moderate Load</div>
+
+<h2>AIIMS Emergency</h2>
+
+<div class="tags">
+<span>General</span>
+<span>Critical Care</span>
+<span>Emergency</span>
+</div>
+
+<div class="details">
+
+Capacity: 500 beds<br>
+ICU Beds Available: 18<br>
+Distance: 5.2 km
+
+</div>
+
+<div class="buttons">
+
+<a href="https://www.aiims.edu" target="_blank" class="btn website">
+Hospital Website
+</a>
+
+<a href="https://maps.google.com/?q=AIIMS Hospital" target="_blank" class="btn map">
+View on Maps
+</a>
+
+<a href="tel:+911234567892" class="btn call">
+Call Hospital
+</a>
+
+</div>
+
+</div>
+
+
+<!-- Medanta -->
+
+<div class="card">
+
+<div class="status ready">Emergency Ready</div>
+
+<h2>Medanta Hospital</h2>
+
+<div class="tags">
+<span>Trauma</span>
+<span>Cardiac</span>
+<span>Emergency</span>
+</div>
+
+<div class="details">
+
+Capacity: 350 beds<br>
+ICU Beds Available: 14<br>
+Distance: 4.7 km
+
+</div>
+
+<div class="buttons">
+
+<a href="https://www.medanta.org" target="_blank" class="btn website">
+Hospital Website
+</a>
+
+<a href="https://maps.google.com/?q=Medanta Hospital" target="_blank" class="btn map">
+View on Maps
+</a>
+
+<a href="tel:+911234567893" class="btn call">
+Call Hospital
+</a>
+
+</div>
+
+</div>
+
+
+<!-- Max -->
+
+<div class="card">
+
+<div class="status moderate">Moderate Load</div>
+
+<h2>Max Super Speciality Hospital</h2>
+
+<div class="tags">
+<span>Emergency</span>
+<span>ICU</span>
+<span>Surgery</span>
+</div>
+
+<div class="details">
+
+Capacity: 290 beds<br>
+ICU Beds Available: 10<br>
+Distance: 3.9 km
+
+</div>
+
+<div class="buttons">
+
+<a href="https://www.maxhealthcare.in" target="_blank" class="btn website">
+Hospital Website
+</a>
+
+<a href="https://maps.google.com/?q=Max Hospital" target="_blank" class="btn map">
+View on Maps
+</a>
+
+<a href="tel:+911234567894" class="btn call">
+Call Hospital
+</a>
+
+</div>
+
+</div>
+
+
+<!-- Manipal -->
+
+<div class="card">
+
+<div class="status ready">Emergency Ready</div>
+
+<h2>Manipal Hospital</h2>
+
+<div class="tags">
+<span>Trauma</span>
+<span>Critical Care</span>
+<span>Emergency</span>
+</div>
+
+<div class="details">
+
+Capacity: 310 beds<br>
+ICU Beds Available: 11<br>
+Distance: 6.1 km
+
+</div>
+
+<div class="buttons">
+
+<a href="https://www.manipalhospitals.com" target="_blank" class="btn website">
+Hospital Website
+</a>
+
+<a href="https://maps.google.com/?q=Manipal Hospital" target="_blank" class="btn map">
+View on Maps
+</a>
+
+<a href="tel:+911234567895" class="btn call">
+Call Hospital
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<footer>
+
+© 2026 MedConnect Hospital Network
+
+</footer>
+
+</body>
+</html>
