@@ -45,17 +45,17 @@
 
 
     <!-- LOGIN -->
-    <div class="dropdown">
-      <button class="dropbtn login-btn" onclick="toggleDropdown('loginMenu')">
-        Login ▾
-      </button>
+    <div class="login-dropdown" id="loginDropdown">
+    <a href="#" id="loginToggle">Login ▾</a>
 
-      <div id="loginMenu" class="dropdown-content">
-        <a href="user/user-login.html">User Login</a>
-        <a href="hospital/hospital-login.html">Hospital Login</a>
-        <a href="admin/admin-login.html">Admin</a>
-      </div>
+    <div class="dropdown-menu" id="loginMenu">
+    <a href="user/user-login.html">User Login</a>
+    <a href="hospital/hospital-login.html">Hospital Login</a>
+    <a href="admin/admin-login.html">Admin Login</a>
     </div>
+
+    </div>
+
 
   </div>
 
@@ -83,8 +83,11 @@
     </p>
 
     <div class="hero-buttons">
-      <a href="#" class="btn-primary">Get Started</a>
-      <a href="#" class="btn-sos">🚨 Activate SOS</a>
+      <a href="#" class="primary-btn" id="getStartedBtn">Get Started</a>
+      <a href="emergency-info.html" class="sos-btn">
+      🚨 Activate SOS
+      </a>
+
       <a href="#how" class="btn-outline">Learn More</a>
     </div>
 

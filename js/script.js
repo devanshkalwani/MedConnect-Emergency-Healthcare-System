@@ -85,6 +85,61 @@ window.addEventListener("click", function (e) {
     }
 
 });
+// ===============================
+// LOGIN DROPDOWN CONTROL
+// ===============================
+
+const loginToggle = document.getElementById("loginToggle");
+const loginMenu = document.getElementById("loginMenu");
+const loginDropdown = document.getElementById("loginDropdown");
+const getStartedBtn = document.getElementById("getStartedBtn");
+
+
+// Toggle dropdown when clicking Login
+if(loginToggle){
+loginToggle.addEventListener("click", function(e){
+e.preventDefault();
+
+if(loginMenu.style.display === "block"){
+loginMenu.style.display = "none";
+}else{
+loginMenu.style.display = "block";
+}
+
+});
+}
+
+
+// Open dropdown when clicking Get Started
+if(getStartedBtn){
+getStartedBtn.addEventListener("click", function(e){
+e.preventDefault();
+
+loginMenu.style.display = "block";
+
+// smooth scroll to navbar
+loginDropdown.scrollIntoView({
+behavior: "smooth",
+block: "center"
+});
+
+});
+}
+
+
+// Close dropdown when clicking outside
+window.addEventListener("click", function(e){
+
+if(
+loginMenu &&
+!loginDropdown.contains(e.target) &&
+!getStartedBtn.contains(e.target)
+){
+loginMenu.style.display = "none";
+}
+
+});
+
 
 
 // ===============================

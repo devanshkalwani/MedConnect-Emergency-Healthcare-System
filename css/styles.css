@@ -162,6 +162,33 @@ cursor:pointer;
 color:#0284c7;
 font-weight:700;
 }
+.login-dropdown{
+position:relative;
+}
+
+.dropdown-menu{
+display:none;
+position:absolute;
+top:40px;
+right:0;
+background:white;
+padding:12px 0;
+border-radius:10px;
+box-shadow:0 8px 24px rgba(0,0,0,0.1);
+min-width:180px;
+z-index:999;
+}
+
+.dropdown-menu a{
+display:block;
+padding:10px 16px;
+text-decoration:none;
+color:#1e293b;
+}
+
+.dropdown-menu a:hover{
+background:#f1f5f9;
+}
 
 
 /* MENU */
@@ -209,6 +236,24 @@ color:#0284c7;
 padding-left:24px;
 }
 
+.primary-btn{
+background:linear-gradient(135deg,#1d8fd6,#3cb4e7);
+color:white;
+padding:14px 34px;
+border-radius:12px;
+font-weight:600;
+font-size:16px;
+text-decoration:none;
+display:inline-block;
+box-shadow:0 6px 20px rgba(29,143,214,0.35);
+transition:all 0.25s ease;
+}
+
+.primary-btn:hover{
+background:linear-gradient(135deg,#167bb8,#2fa4d6);
+box-shadow:0 10px 28px rgba(29,143,214,0.45);
+transform:translateY(-2px);
+}
 
 
 /* ================= MOBILE ================= */
@@ -313,16 +358,27 @@ transform:translateY(-6px);
 box-shadow:0 25px 60px rgba(14,165,233,.45);
 }
 
-.btn-sos{
-background:#dc2626;
-padding:20px 50px;
-border-radius:50px;
-text-decoration:none;
+.sos-btn{
+background:linear-gradient(135deg,#d40c27,#d90429);
 color:white;
-font-weight:700;
-font-size:18px;
-box-shadow:0 14px 40px rgba(220,38,38,.35);
+padding:14px 34px;
+border-radius:14px;
+font-weight:600;
+font-size:16px;
+text-decoration:none;
+border:none;
+cursor:pointer;
+box-shadow:0 6px 18px rgba(217,4,41,0.35);
+transition:all 0.25s ease;
 }
+
+.sos-btn:hover{
+background:linear-gradient(135deg,#790010,#b00020);
+box-shadow:0 8px 24px rgba(176,0,32,0.45);
+transform:translateY(-2px);
+}
+
+
 
 .btn-outline{
 border:2px solid var(--blue-main);
