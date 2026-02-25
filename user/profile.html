@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical Profile | MedConnect</title>
+
+<link rel="stylesheet" href="../css/styles.css">
+
+<style>
+
+body{
+margin:0;
+font-family:"Segoe UI",sans-serif;
+background:linear-gradient(180deg,#eef4fa,#e6edf5);
+}
+
+/* Layout */
+.container{
+display:flex;
+min-height:100vh;
+}
+
+/* Sidebar */
+.sidebar{
+width:260px;
+background:linear-gradient(180deg,#0b2c48,#124a78);
+padding:25px;
+color:white;
+display:flex;
+flex-direction:column;
+}
+
+.sidebar img{
+width:170px;
+margin-bottom:30px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:14px;
+border-radius:10px;
+margin-bottom:8px;
+}
+
+.sidebar a:hover{
+background:rgba(255,255,255,0.1);
+}
+
+.logout{
+margin-top:auto;
+background:#e63946;
+text-align:center;
+}
+
+/* Main */
+.main{
+flex:1;
+padding:40px;
+}
+
+/* Header */
+.header{
+background:white;
+padding:20px 30px;
+border-radius:12px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:25px;
+}
+
+.header h1{
+margin:0;
+color:#0b2c48;
+}
+
+/* Profile Form */
+.profile-card{
+background:white;
+padding:30px;
+border-radius:14px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.form-group{
+display:flex;
+flex-direction:column;
+}
+
+label{
+font-weight:600;
+margin-bottom:6px;
+color:#0b2c48;
+}
+
+input, select, textarea{
+padding:10px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:14px;
+}
+
+textarea{
+resize:none;
+}
+
+.full{
+grid-column:span 2;
+}
+
+.save-btn{
+margin-top:20px;
+padding:12px 20px;
+background:#0b2c48;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.save-btn:hover{
+background:#124a78;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+font-weight:600;
+color:#0b2c48;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- Sidebar -->
+<div class="sidebar">
+
+<img src="../images/medconnect-logo.png">
+
+<a href="dashboard.html">Dashboard</a>
+<a href="sos.html">Emergency SOS</a>
+<a href="alert-history.html">Alert History</a>
+<a href="profile.html">Medical Profile</a>
+<a href="pharmacy.html">Pharmacy</a>
+<a href="contacts.html">Emergency Contacts</a>
+<a href="../hospitals.html">Nearby Hospitals</a>
+<a href="settings.html">Settings</a>
+
+<a href="../index.html" class="logout">Logout</a>
+
+</div>
+
+<!-- Main -->
+<div class="main">
+
+<div class="header">
+<h1>Medical Profile</h1>
+<p>Information here will be automatically shared during SOS activation.</p>
+</div>
+
+<div class="profile-card">
+
+<form>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" placeholder="Enter full name">
+</div>
+
+<div class="form-group">
+<label>Age</label>
+<input type="number" placeholder="Enter age">
+</div>
+
+<div class="form-group">
+<label>Blood Group</label>
+<select>
+<option>Select</option>
+<option>O+</option>
+<option>O-</option>
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Phone Number</label>
+<input type="text" placeholder="Enter phone number">
+</div>
+
+<div class="form-group full">
+<label>Medical Conditions</label>
+<textarea rows="3" placeholder="E.g., Asthma, Diabetes, Cardiac issues"></textarea>
+</div>
+
+<div class="form-group full">
+<label>Allergies</label>
+<textarea rows="2" placeholder="E.g., Penicillin, Dust, Food allergies"></textarea>
+</div>
+
+<div class="form-group full">
+<label>Current Medications</label>
+<textarea rows="2" placeholder="List current medications"></textarea>
+</div>
+
+<div class="form-group full">
+<label>Home Address</label>
+<textarea rows="3" placeholder="Enter full address"></textarea>
+</div>
+
+</div>
+
+<button type="button" class="save-btn" onclick="alert('Profile saved successfully!')">
+Save Profile
+</button>
+
+</form>
+
+</div>
+
+<a href="dashboard.html" class="back">
+← Back to Dashboard
+</a>
+
+</div>
+</div>
+
+</body>
+</html>

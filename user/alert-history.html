@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Alert History | MedConnect</title>
+
+<link rel="stylesheet" href="../css/styles.css">
+
+<style>
+
+body{
+margin:0;
+font-family:"Segoe UI",sans-serif;
+background:linear-gradient(180deg,#eef4fa,#e6edf5);
+}
+
+/* Layout */
+
+.container{
+display:flex;
+min-height:100vh;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:260px;
+background:linear-gradient(180deg,#0b2c48,#124a78);
+padding:25px;
+color:white;
+}
+
+.sidebar img{
+width:170px;
+margin-bottom:30px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:14px;
+border-radius:10px;
+margin-bottom:8px;
+}
+
+.sidebar a:hover{
+background:rgba(255,255,255,0.1);
+}
+
+.logout{
+margin-top:20px;
+background:#e63946;
+text-align:center;
+}
+
+/* Main */
+
+.main{
+flex:1;
+padding:40px;
+}
+
+/* Header */
+
+.header{
+background:white;
+padding:20px 30px;
+border-radius:12px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:25px;
+}
+
+.header h1{
+margin:0;
+color:#0b2c48;
+}
+
+/* Table */
+
+.table-container{
+background:white;
+border-radius:12px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+overflow:hidden;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th, td{
+padding:16px;
+text-align:left;
+}
+
+th{
+background:#0b2c48;
+color:white;
+}
+
+tr:nth-child(even){
+background:#f4f8fb;
+}
+
+/* Status colors */
+
+.success{
+color:green;
+font-weight:600;
+}
+
+.pending{
+color:orange;
+font-weight:600;
+}
+
+.failed{
+color:red;
+font-weight:600;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+font-weight:600;
+color:#0b2c48;
+}
+
+</style>
+
+</head>
+<body>
+
+
+<div class="container">
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<img src="../images/medconnect-logo.png">
+
+<a href="dashboard.html">Dashboard</a>
+<a href="sos.html">Emergency SOS</a>
+<a href="alert-history.html">Alert History</a>
+<a href="profile.html">Medical Profile</a>
+<a href="pharmacy.html">Pharmacy</a>
+<a href="contacts.html">Emergency Contacts</a>
+<a href="../hospitals.html">Nearby Hospitals</a>
+<a href="settings.html">Settings</a>
+
+<a href="../index.html" class="logout">Logout</a>
+
+</div>
+
+
+<!-- Main -->
+
+<div class="main">
+
+<div class="header">
+<h1>Emergency Alert History</h1>
+<p>Track all emergency alerts and response status.</p>
+</div>
+
+
+<div class="table-container">
+
+<table>
+
+<tr>
+<th>Alert ID</th>
+<th>Date</th>
+<th>Time</th>
+<th>Type</th>
+<th>Hospital Response</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>MC10234</td>
+<td>12 Feb 2026</td>
+<td>10:42 PM</td>
+<td>Medical Emergency</td>
+<td>Apollo Hospital</td>
+<td class="success">Responded</td>
+</tr>
+
+<tr>
+<td>MC10221</td>
+<td>02 Feb 2026</td>
+<td>03:14 PM</td>
+<td>Accident</td>
+<td>Fortis Hospital</td>
+<td class="success">Ambulance Dispatched</td>
+</tr>
+
+<tr>
+<td>MC10198</td>
+<td>21 Jan 2026</td>
+<td>07:33 AM</td>
+<td>Cardiac Emergency</td>
+<td>City Care Hospital</td>
+<td class="success">Completed</td>
+</tr>
+
+<tr>
+<td>MC10172</td>
+<td>05 Jan 2026</td>
+<td>11:15 PM</td>
+<td>Emergency Assistance</td>
+<td>Global Health</td>
+<td class="success">Responded</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<a href="dashboard.html" class="back">
+← Back to Dashboard
+</a>
+
+
+</div>
+
+</div>
+
+</body>
+</html>

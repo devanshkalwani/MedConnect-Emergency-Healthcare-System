@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pharmacy Support | MedConnect</title>
+
+<link rel="stylesheet" href="../css/styles.css">
+
+<style>
+
+body{
+margin:0;
+font-family:"Segoe UI",sans-serif;
+background:linear-gradient(180deg,#eef4fa,#e6edf5);
+}
+
+/* Layout */
+.container{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:260px;
+background:linear-gradient(180deg,#0b2c48,#124a78);
+padding:25px;
+color:white;
+display:flex;
+flex-direction:column;
+}
+
+.sidebar img{
+width:170px;
+margin-bottom:30px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:14px;
+border-radius:10px;
+margin-bottom:8px;
+}
+
+.sidebar a:hover{
+background:rgba(255,255,255,0.1);
+}
+
+.logout{
+margin-top:auto;
+background:#e63946;
+text-align:center;
+}
+
+.main{
+flex:1;
+padding:40px;
+}
+
+/* Header */
+.header{
+background:white;
+padding:20px 30px;
+border-radius:12px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:25px;
+}
+
+/* Search Bar */
+.search-box{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:25px;
+display:flex;
+gap:10px;
+}
+
+.search-box input{
+flex:1;
+padding:12px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:15px;
+}
+
+.search-btn{
+padding:12px 20px;
+background:#0b2c48;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.search-btn:hover{
+background:#124a78;
+}
+
+/* Section title */
+.section-title{
+font-size:20px;
+margin-bottom:15px;
+color:#0b2c48;
+}
+
+/* Card */
+.card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:15px;
+}
+
+.card h3{
+margin:0;
+}
+
+.card p{
+margin:5px 0;
+color:#555;
+}
+
+.btn{
+padding:8px 14px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+margin-right:8px;
+}
+
+.call{
+background:#0b2c48;
+color:white;
+}
+
+.request{
+background:#e63946;
+color:white;
+}
+
+.hidden{
+display:none;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+font-weight:600;
+color:#0b2c48;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Sidebar -->
+<div class="sidebar">
+
+<img src="../images/medconnect-logo.png">
+
+<a href="dashboard.html">Dashboard</a>
+<a href="sos.html">Emergency SOS</a>
+<a href="alert-history.html">Alert History</a>
+<a href="profile.html">Medical Profile</a>
+<a href="pharmacy.html">Pharmacy</a>
+<a href="contacts.html">Emergency Contacts</a>
+<a href="../hospitals.html">Nearby Hospitals</a>
+<a href="settings.html">Settings</a>
+
+<a href="../index.html" class="logout">Logout</a>
+
+</div>
+
+
+<!-- Main -->
+<div class="main">
+
+<div class="header">
+<h1>Pharmacy Support</h1>
+<p>Search medicines and find nearby pharmacies with availability.</p>
+</div>
+
+
+<!-- Search Section -->
+<div class="search-box">
+
+<input type="text" id="medicineInput" placeholder="Search medicine (e.g. Crocin, Paracetamol)">
+
+<button class="search-btn" onclick="searchMedicine()">
+Search
+</button>
+
+</div>
+
+
+<!-- Search Results -->
+<div id="resultsSection" class="hidden">
+
+<div class="section-title">
+Search Results
+</div>
+
+<div id="resultsContainer">
+</div>
+
+</div>
+
+
+<!-- Nearby Pharmacies -->
+<div>
+
+<div class="section-title">
+Nearby Pharmacies
+</div>
+
+<div class="card">
+<h3>CityMed Pharmacy</h3>
+<p>Distance: 0.8 km</p>
+<p>Status: Open 24/7</p>
+
+<button class="btn call" onclick="alert('Calling pharmacy...')">Call</button>
+<button class="btn request" onclick="alert('Medicine request sent')">Request</button>
+</div>
+
+<div class="card">
+<h3>Apollo Pharmacy</h3>
+<p>Distance: 1.2 km</p>
+<p>Status: Open</p>
+
+<button class="btn call" onclick="alert('Calling pharmacy...')">Call</button>
+<button class="btn request" onclick="alert('Medicine request sent')">Request</button>
+</div>
+
+<div class="card">
+<h3>MedPlus Pharmacy</h3>
+<p>Distance: 2.1 km</p>
+<p>Status: Open</p>
+
+<button class="btn call" onclick="alert('Calling pharmacy...')">Call</button>
+<button class="btn request" onclick="alert('Medicine request sent')">Request</button>
+</div>
+
+</div>
+
+
+<a href="dashboard.html" class="back">
+← Back to Dashboard
+</a>
+
+</div>
+
+</div>
+
+
+<script>
+
+function searchMedicine(){
+
+const input=document.getElementById("medicineInput").value;
+
+if(input===""){
+alert("Please enter medicine name");
+return;
+}
+
+const results=document.getElementById("resultsContainer");
+
+results.innerHTML=`
+
+<div class="card">
+<h3>${input}</h3>
+<p>Available at CityMed Pharmacy (0.8 km)</p>
+
+<button class="btn call">Call</button>
+<button class="btn request">Request</button>
+</div>
+
+<div class="card">
+<h3>${input}</h3>
+<p>Available at Apollo Pharmacy (1.2 km)</p>
+
+<button class="btn call">Call</button>
+<button class="btn request">Request</button>
+</div>
+
+`;
+
+document.getElementById("resultsSection").classList.remove("hidden");
+
+}
+
+</script>
+
+</body>
+</html>

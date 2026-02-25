@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Settings | MedConnect</title>
+
+<link rel="stylesheet" href="../css/styles.css">
+
+<style>
+
+body{
+margin:0;
+font-family:"Segoe UI",sans-serif;
+background:linear-gradient(180deg,#eef4fa,#e6edf5);
+}
+
+/* Layout */
+.container{
+display:flex;
+min-height:100vh;
+}
+
+/* Sidebar */
+.sidebar{
+width:260px;
+background:linear-gradient(180deg,#0b2c48,#124a78);
+padding:25px;
+color:white;
+display:flex;
+flex-direction:column;
+}
+
+.sidebar img{
+width:170px;
+margin-bottom:30px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:14px;
+border-radius:10px;
+margin-bottom:8px;
+}
+
+.sidebar a:hover{
+background:rgba(255,255,255,0.1);
+}
+
+.logout{
+margin-top:auto;
+background:#e63946;
+text-align:center;
+}
+
+/* Main */
+.main{
+flex:1;
+padding:40px;
+}
+
+/* Header */
+.header{
+background:white;
+padding:20px 30px;
+border-radius:12px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:25px;
+}
+
+/* Settings Cards */
+.settings-card{
+background:white;
+padding:25px;
+border-radius:14px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:20px;
+}
+
+.settings-card h3{
+margin-top:0;
+color:#0b2c48;
+}
+
+.settings-card input{
+width:100%;
+padding:10px;
+margin-top:8px;
+margin-bottom:15px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+/* Button */
+.save-btn{
+padding:12px 20px;
+background:#0b2c48;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.save-btn:hover{
+background:#124a78;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+font-weight:600;
+color:#0b2c48;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<img src="../images/medconnect-logo.png">
+
+<a href="dashboard.html">Dashboard</a>
+<a href="sos.html">Emergency SOS</a>
+<a href="alert-history.html">Alert History</a>
+<a href="profile.html">Medical Profile</a>
+<a href="pharmacy.html">Pharmacy</a>
+<a href="contacts.html">Emergency Contacts</a>
+<a href="../hospitals.html">Nearby Hospitals</a>
+<a href="settings.html">Settings</a>
+
+<a href="../index.html" class="logout">Logout</a>
+
+</div>
+
+
+<!-- Main -->
+
+<div class="main">
+
+<div class="header">
+<h1>Account Settings</h1>
+<p>Manage your account and emergency preferences.</p>
+</div>
+
+
+<!-- Account Info -->
+
+<div class="settings-card">
+
+<h3>Account Information</h3>
+
+<label>Email</label>
+<input type="email" value="user@medconnect.com">
+
+<label>Phone Number</label>
+<input type="text" value="+91 9876543210">
+
+<button class="save-btn" onclick="alert('Account info updated')">
+Update Information
+</button>
+
+</div>
+
+
+<!-- Change Password -->
+
+<div class="settings-card">
+
+<h3>Change Password</h3>
+
+<label>Current Password</label>
+<input type="password">
+
+<label>New Password</label>
+<input type="password">
+
+<label>Confirm New Password</label>
+<input type="password">
+
+<button class="save-btn" onclick="alert('Password changed successfully')">
+Change Password
+</button>
+
+</div>
+
+
+<!-- Emergency Preferences -->
+
+<div class="settings-card">
+
+<h3>Emergency Preferences</h3>
+
+<label>Default Emergency Contact</label>
+<input type="text" value="Mother">
+
+<label>Preferred Hospital</label>
+<input type="text" value="Apollo Hospital">
+
+<button class="save-btn" onclick="alert('Preferences saved')">
+Save Preferences
+</button>
+
+</div>
+
+
+<a href="dashboard.html" class="back">
+← Back to Dashboard
+</a>
+
+
+</div>
+
+</div>
+
+</body>
+</html>

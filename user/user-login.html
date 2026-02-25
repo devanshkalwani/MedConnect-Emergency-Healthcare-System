@@ -4,125 +4,203 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>User Login — MedConnect</title>
+<title>User Login | MedConnect</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
 body{
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#eaf4fb,#f6fbff);
+    margin:0;
+    font-family:"Segoe UI",sans-serif;
+    background:linear-gradient(180deg,#eef4fa,#e6edf5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
 }
 
-/* LOGIN CARD */
+/* Login Card */
 
-.card{
-width:420px;
-background:white;
-padding:50px 40px;
-border-radius:20px;
-box-shadow:0 20px 50px rgba(2,6,23,.08);
-text-align:center;
+.login-card{
+
+    width:440px;
+    background:white;
+
+    padding:50px 45px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 25px 50px rgba(0,0,0,0.15),
+    0 5px 10px rgba(0,0,0,0.05);
+
+    text-align:center;
 }
 
-/* LOGO */
+/* Logo Container */
 
-.logo{
-height:65px;
-margin-bottom:20px;
+.logo-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:25px;
 }
 
-/* TITLE */
+/* BIG LOGO */
 
-h2{
-margin-bottom:25px;
-font-size:24px;
-color:#0f172a;
+.logo-container img{
+    width:150px;
+    height:auto;
 }
 
-/* INPUTS */
+/* Title */
 
-input{
-width:100%;
-padding:15px;
-margin:10px 0;
-border-radius:12px;
-border:1px solid #cbd5e1;
-font-size:15px;
+.login-card h2{
+    margin-bottom:28px;
+    color:#0b2c48;
+    font-size:28px;
+    font-weight:600;
 }
 
-input:focus{
-outline:none;
-border-color:#0284c7;
+/* Inputs */
+
+.login-card input{
+
+    width:100%;
+    padding:15px;
+
+    margin-bottom:18px;
+
+    border-radius:12px;
+    border:1px solid #d0d7e2;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:0.2s;
 }
 
-/* BUTTON */
+.login-card input:focus{
 
-button{
-width:100%;
-padding:15px;
-margin-top:15px;
-border:none;
-border-radius:14px;
-background:#0284c7;
-color:white;
-font-size:16px;
-font-weight:600;
-cursor:pointer;
-transition:.3s;
+    border-color:#1d7db6;
+
+    box-shadow:0 0 0 3px rgba(29,125,182,0.15);
 }
 
-button:hover{
-background:#0369a1;
+/* Button */
+
+.login-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,#1d7db6,#0b5f94);
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.25s;
 }
 
-/* LINK */
+.login-btn:hover{
 
-.link{
-margin-top:18px;
-font-size:14px;
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 25px rgba(29,125,182,0.3);
 }
 
-.link a{
-color:#0284c7;
-text-decoration:none;
-font-weight:600;
+/* Register */
+
+.register{
+
+    margin-top:20px;
+    font-size:15px;
+    color:#555;
+}
+
+.register a{
+
+    color:#1d7db6;
+    font-weight:600;
+    text-decoration:none;
+}
+
+/* Back Button */
+
+.back-btn{
+
+    display:inline-block;
+
+    margin-top:22px;
+
+    color:#0b2c48;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    font-size:15px;
+}
+
+.back-btn:hover{
+
+    text-decoration:underline;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="card">
+<div class="login-card">
 
-<img src="../images/medconnect-logo.png" class="logo">
+    <!-- BIG LOGO -->
+    <div class="logo-container">
+        <img src="../images/medconnect-logo.png" alt="MedConnect Logo">
+    </div>
 
-<h2>User Account Login</h2>
+    <h2>User Portal Login</h2>
 
-<input type="email" placeholder="Email Address">
-<input type="password" placeholder="Password">
+    <input type="email" placeholder="Enter Email">
 
-<button onclick="location.href='dashboard.html'">
-Login to Dashboard
-</button>
+    <input type="password" placeholder="Enter Password">
 
-<div class="link">
-New user? <a href="user-register.html">Create Account</a>
+    <button class="login-btn" onclick="loginUser()">
+        Login to Dashboard
+    </button>
+
+    <div class="register">
+        New User? <a href="user-register.html">Register Here</a>
+    </div>
+
+    <a href="../index.html" class="back-btn">
+        ← Back to Home
+    </a>
+
 </div>
 
-</div>
+<script>
+
+function loginUser(){
+
+    window.location.href="dashboard.html";
+
+}
+
+</script>
 
 </body>
 </html>

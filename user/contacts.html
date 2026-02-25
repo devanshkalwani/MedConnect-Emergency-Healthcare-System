@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Contacts | MedConnect</title>
+
+<link rel="stylesheet" href="../css/styles.css">
+
+<style>
+
+body{
+margin:0;
+font-family:"Segoe UI",sans-serif;
+background:linear-gradient(180deg,#eef4fa,#e6edf5);
+}
+
+/* Layout */
+.container{
+display:flex;
+min-height:100vh;
+}
+
+/* Sidebar */
+.sidebar{
+width:260px;
+background:linear-gradient(180deg,#0b2c48,#124a78);
+padding:25px;
+color:white;
+display:flex;
+flex-direction:column;
+}
+
+.sidebar img{
+width:170px;
+margin-bottom:30px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:14px;
+border-radius:10px;
+margin-bottom:8px;
+}
+
+.sidebar a:hover{
+background:rgba(255,255,255,0.1);
+}
+
+.logout{
+margin-top:auto;
+background:#e63946;
+text-align:center;
+}
+
+/* Main */
+.main{
+flex:1;
+padding:40px;
+}
+
+/* Header */
+.header{
+background:white;
+padding:20px 30px;
+border-radius:12px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:25px;
+}
+
+.header h1{
+margin:0;
+color:#0b2c48;
+}
+
+/* Contact Card */
+.contact-card{
+background:white;
+padding:25px;
+border-radius:14px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-bottom:20px;
+}
+
+.contact{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 0;
+border-bottom:1px solid #eee;
+}
+
+.contact:last-child{
+border-bottom:none;
+}
+
+.contact-name{
+font-weight:600;
+color:#0b2c48;
+}
+
+.contact-phone{
+color:#555;
+}
+
+/* Add Contact Form */
+.form{
+background:white;
+padding:25px;
+border-radius:14px;
+box-shadow:0 6px 16px rgba(0,0,0,0.08);
+margin-top:25px;
+}
+
+.form input{
+width:100%;
+padding:10px;
+margin-bottom:15px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+.add-btn{
+padding:12px 18px;
+background:#0b2c48;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.add-btn:hover{
+background:#124a78;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+font-weight:600;
+color:#0b2c48;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- Sidebar -->
+<div class="sidebar">
+
+<img src="../images/medconnect-logo.png">
+
+<a href="dashboard.html">Dashboard</a>
+<a href="sos.html">Emergency SOS</a>
+<a href="alert-history.html">Alert History</a>
+<a href="profile.html">Medical Profile</a>
+<a href="pharmacy.html">Pharmacy</a>
+<a href="contacts.html">Emergency Contacts</a>
+<a href="../hospitals.html">Nearby Hospitals</a>
+<a href="settings.html">Settings</a>
+
+<a href="../index.html" class="logout">Logout</a>
+
+</div>
+
+<!-- Main -->
+<div class="main">
+
+<div class="header">
+<h1>Emergency Contacts</h1>
+<p>These contacts will be notified automatically during SOS activation.</p>
+</div>
+
+
+<!-- Existing Contacts -->
+
+<div class="contact-card">
+
+<div class="contact">
+<div>
+<div class="contact-name">Mother</div>
+<div class="contact-phone">+91 9876543210</div>
+</div>
+</div>
+
+<div class="contact">
+<div>
+<div class="contact-name">Father</div>
+<div class="contact-phone">+91 9876543211</div>
+</div>
+</div>
+
+<div class="contact">
+<div>
+<div class="contact-name">Family Doctor</div>
+<div class="contact-phone">+91 9876543212</div>
+</div>
+</div>
+
+</div>
+
+
+<!-- Add New Contact -->
+
+<div class="form">
+
+<h3>Add New Contact</h3>
+
+<input type="text" placeholder="Contact Name">
+
+<input type="text" placeholder="Phone Number">
+
+<button class="add-btn" onclick="alert('Contact added successfully')">
+Add Contact
+</button>
+
+</div>
+
+
+<a href="dashboard.html" class="back">
+← Back to Dashboard
+</a>
+
+
+</div>
+</div>
+
+</body>
+</html>
