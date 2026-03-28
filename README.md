@@ -1,14 +1,4 @@
-# MedConnect-Emergency-Healthcare-System
-Listed directory core
-Listed directory js
-Searched for "threshold"
-Searched for "const"
-Viewed models.py:1-106
-Viewed views.py:1-548
-Viewed consumers.py:1-13
-Viewed api-config.js:1-53
-
-#### 🏥 MedConnect | The Clinical Emergency Infrastructure (v2.1)
+# 🏥 MedConnect | The Clinical Emergency Infrastructure (v2.1)
 
 **MedConnect** is a professional-grade, high-trust emergency healthcare platform designed to bridge the gap between patients and hospitals with clinical precision. This project moves beyond a simple "SOS app" into a full-scale clinical dispatch system with strict data protocols, real-time logistics, and HIPAA-compliant privacy layers.
 
@@ -47,53 +37,56 @@ MedConnect implements a **"Zero-Knowledge Dispatch"** protocol to protect Patien
 
 ---
 
-### 🚑 Advanced Clinical Features
+### 🚑 Key Features
 
-#### 1. V2.0 Third-Party Victim Reporting
-Users can report emergencies for others (e.g., a witness at a crash site).
-*   **`is_for_self` Toggle**: If set to `false`, the system captures the victim's name, localized condition, and phone number separately from the caller's profile.
-*   **Caller-Victim Mapping**: The hospital sees both the caller's location and the victim's immediate needs.
+#### 1. Patient Portal (Individual Hub)
+*   **Real-time SOS Dispatch**: One-tap emergency activation that pings the nearest capable medical facilities.
+*   **Digital Health Records (EHR)**: Secure storage for critical medical history, blood type, allergies, and chronic conditions.
+*   **Emergency Circle**: Management of primary and secondary emergency contacts for automated notifications.
+*   **Third-Party Victim Reporting**: Users can report emergencies for others (e.g., a witness at a crash site) using the `is_for_self` toggle.
 
-#### 2. Provider Command Center
-*   **Real-time Ticker**: Uses WebSockets to stream inbound dispatches instantly without page refreshes.
-*   **Bed Management**: Hospitals track `Total Beds` vs. `ICU Beds` to determine capacity for incoming trauma.
-*   **Stabilization Workflows**: Electronic admission protocols once the patient reaches the facility.
+#### 2. Provider Portal (Clinical Command Center)
+*   **Live SOS Dashboard**: Real-time ticker of inbound emergency requests with distance and estimated arrival times.
+*   **Emergency Lifecycle Management**: Includes the "Resolve" state to formally close emergency cases after stabilization.
+*   **Clinical Data Access**: Instant access to patient medical context upon dispatch acceptance.
+*   **Hospital Bed Management**: Real-time tracking of `Total Beds` vs. `ICU Beds` to determine trauma capacity.
 
 ---
 
-### 🛠️ Technical Deep Dive
+### 🎨 Design Philosophy
+The platform utilizes a **Clinical Aesthetic** designed for high-stress environments:
+*   **Typography**: Uses `Inter` for maximum legibility.
+*   **Color Palette**: "Trust Blue" (#0284c7) and "Safe White" to reduce visual anxiety.
+*   **Visual Polish**: 100px branding scale, smooth reveal animations, and optimized spatial density.
 
-#### **The Backend (Django 5.1 + REST Framework)**
+---
+
+### 🛠️ Technical Stack
+
+#### **Frontend**
+*   **HTML5/CSS3**: Vanilla architecture for maximum performance and zero dependency overhead.
+*   **JavaScript (ES6+)**: Handles real-time DOM updates and API interactions.
+*   **Modern Web APIs**: Geolocation for tracking, Fetch for data sync.
+
+#### **Backend (Django 5.1 + REST Framework)**
 *   **Relational Mapping**: SQLite3 maintains complex relationships between `Users`, `Hospitals`, and `SOSRequests`.
 *   **Real-time Layer**: `django-channels` provides the WebSocket infrastructure for the 15km broadcast net.
-*   **Concurrency Control**: Uses `transaction.atomic()` and `select_for_update()` during hospital acceptance to ensure two hospitals cannot accept the same patient.
-
-#### **The Frontend (Vanilla Engine)**
-*   **No Framework Overload**: Built with pure HTML5/CSS3/JS for sub-second loading on low-bandwidth emergency connections.
-*   **Geolocation Saturation**: Continually polls for high-accuracy GPS coordinates during an active SOS.
-*   **Clinical UI**: Uses the **Inter** font family and a trust-based HSL color palette tailored for medical clarity.
+*   **Concurrency Control**: Uses atomic transactions to ensure data integrity during hospital acceptance.
 
 ---
 
-### 📂 Detailed Directory Map
+### 📂 Project Structure
 
 ```text
-├── medconnect_backend/
-│   ├── core/
-│   │   ├── models.py      # Schema for EHR, Hospitals, & SOS expansion
-│   │   ├── views.py       # Logic for Radius Thresholds & HIPAA masking
-│   │   ├── consumers.py   # WebSocket broadcast logic
-│   │   └── routing.py     # Real-time URL patterns
-├── user/
-│   ├── sos.html           # High-stress emergency trigger interface
-│   ├── dashboard.html     # Patient Health Hub (EHR)
-│   └── contacts.html      # Emergency "Circle of Trust" management
-├── hospital/
-│   ├── dashboard.html     # Live trauma dispatch ticker
-├── admin/                 # Provider onboarding & system audit
-└── js/
-    ├── api-config.js      # Self-healing API base URL discovery
-    └── script.js          # Core UI animations & SOS polling logic
+├── root files           # Landing page (index.html), Hospitals, About, SOS
+├── user/                # Patient Hub & EHR Management
+├── hospital/            # Provider Command Center
+├── admin/               # Site Administration & Audit
+├── medconnect_backend/  # Django Core API & Business Logic
+├── css/                 # Global Clinical Design System
+├── js/                  # Real-time Logic & Dispatch
+├── images/              # Verified Clinical Assets
+└── tmp/                 # Temporary logs and debug data
 ```
 
 ---
@@ -101,8 +94,8 @@ Users can report emergencies for others (e.g., a witness at a crash site).
 ### 🚥 System Constants & Thresholds
 *   **Max Active SOS**: 1 per user (prevents spam/confusion).
 *   **Default Scale**: 1:1,000 (meters to KM conversion for radius logic).
-*   **API Timeout**: 5000ms (configured for rapid failover between local/remote backends).
-*   **UI Reveal Point**: 120px (standardized clinical dashboard scroll threshold).
+*   **API Timeout**: 5000ms (configured for rapid failover).
+*   **Regulatory Compliance**: National Telemedicine Practice Guidelines (2025).
 
 ---
-*Developed by Devansh Kalwani for the MedConnect-Emergency-Healthcare-System.*
+*Created by Devansh Kalwani for the MedConnect-Emergency-Healthcare-System.*

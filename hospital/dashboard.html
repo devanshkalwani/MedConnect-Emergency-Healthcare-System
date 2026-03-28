@@ -21,17 +21,35 @@ color:#334155;
 min-height: 100vh;
 }
 
-.nav{
-background:#ffffff;
-border-bottom: 2px solid #e2e8f0;
-color:#0f172a;
-padding:15px 5%;
-font-size:20px;
-font-weight:700;
-display: flex;
-justify-content: space-between;
-align-items: center;
-box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+.nav {
+    background: #ffffff;
+    border-bottom: 2px solid #e2e8f0;
+    color: #0f172a;
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+}
+
+.nav-brand-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-brand-box img {
+    height: 85px;
+    width: auto;
+}
+
+.nav-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
 }
 
 .nav span {
@@ -142,16 +160,69 @@ border-radius: 12px;
 min-width: 120px;
 text-align: center;
 }
-.stat-box .title { color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;}
-.stat-box .value { color: #0f172a; font-size: 24px; font-weight: 800; margin-top:5px; }
+.facility-overview {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px dashed #cbd5e1;
+}
+
+.facility-overview h3 {
+    font-size: 14px;
+    color: #475569;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.metric-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.metric-row span:first-child {
+    color: #64748b;
+    font-weight: 500;
+}
+
+.metric-row span:last-child {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+/* Branded Dashboard Accent */
+.dashboard-accent {
+    position: fixed;
+    bottom: -50px;
+    right: -50px;
+    opacity: 0.03;
+    z-index: 0;
+    pointer-events: none;
+    transform: rotate(-15deg);
+}
+
+.dashboard-accent img {
+    width: 400px;
+}
 
 </style>
 </head>
 
 <body>
 
+<div class="dashboard-accent">
+    <img src="../images/medconnect-logo.png" alt="">
+</div>
+
 <div class="nav">
-    <div id="hospitalNav">MedConnect Dispatch</div>
+    <div class="nav-brand-box">
+        <img src="../images/medconnect-logo.png" alt="MedConnect">
+        <div class="nav-title" id="hospitalNav">Hospital Command Center</div>
+    </div>
     <span>LIVE RADAR ACTIVE</span>
 </div>
 
@@ -166,6 +237,27 @@ text-align: center;
         </div>
 
         <div id="sosList"></div>
+
+        <!-- Facility Health Stats -->
+        <div class="facility-overview">
+            <h3>Facility Health</h3>
+            <div class="metric-row">
+                <span>Trauma Team Alpha</span>
+                <span style="color:#16a34a;">READY</span>
+            </div>
+            <div class="metric-row">
+                <span>Blood Supply (O-)</span>
+                <span>4.2 Units</span>
+            </div>
+            <div class="metric-row">
+                <span>Oxygen Reserves</span>
+                <span>94%</span>
+            </div>
+            <div class="metric-row">
+                <span>Diagnostic Bay</span>
+                <span style="color:#ea580c;">BUSY</span>
+            </div>
+        </div>
     </div>
 
     <!-- RIGHT PANEL: MAP & STATS -->

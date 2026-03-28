@@ -3,220 +3,296 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency SOS | MedConnect</title>
 
-<title>Emergency SOS | MedConnect V2</title>
+<!-- Consistent Inter Typography -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../css/styles.css">
 <!-- LEAFLET MAPS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
-
-body{
-margin:0;
-font-family:'Inter',sans-serif;
-background:#f8fafc; /* Clinical Light Background */
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
+:root {
+    --primary: #0284c7;
+    --medical-red: #dc2626;
+    --red-glow: rgba(220, 38, 38, 0.2);
+    --slate-800: #0f172a;
+    --slate-600: #475569;
+    --slate-400: #94a3b8;
 }
 
-.sos-container{
-background:#ffffff;
-padding:50px;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,0.05);
-border: 1px solid #e2e8f0;
-text-align:center;
-width:450px;
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f8fafc;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-h1{
-color:#dc2626; /* Medical Red */
-margin-bottom:10px;
-font-size:32px;
-font-weight: 800;
+/* ================= SOS NAVBAR ================= */
+.sos-nav {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    height: 100px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
 }
 
-.desc{
-color:#64748b;
-margin-bottom:35px;
-font-size: 16px;
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
 }
 
-/* SOS BUTTON */
-.sos-button{
-width:200px;
-height:200px;
-border-radius:50%;
-border:none;
-background:#dc2626; /* Solid Medical Red */
-color:white;
-font-size:32px;
-font-weight:800;
-cursor:pointer;
-box-shadow: 0 10px 25px rgba(220, 38, 38, 0.2);
-transition: all 0.3s ease;
-border: 6px solid #fecaca;
+.nav-brand img {
+    height: 80px;
+    width: auto;
 }
 
-.sos-button:hover{
-background:#b91c1c;
-border-color: #f87171;
-transform: scale(1.02);
+.logo-text {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--slate-800);
+}
+
+.logo-text span {
+    color: var(--primary);
+}
+
+.back-link {
+    text-decoration: none;
+    color: var(--slate-600);
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: var(--primary);
+}
+
+/* ================= SOS CONTENT ================= */
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.sos-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    width: 100%;
+    max-width: 480px;
+}
+
+h1 {
+    color: var(--medical-red);
+    margin: 0 0 10px 0;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.desc {
+    color: var(--slate-600);
+    margin-bottom: 40px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* SOS BUTTON PULSE */
+.sos-button {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 8px solid #fee2e2;
+    background: var(--medical-red);
+    color: white;
+    font-size: 36px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 12px 30px var(--red-glow);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: sosPulse 2s infinite ease-out;
+}
+
+@keyframes sosPulse {
+    0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+    70% { box-shadow: 0 0 0 25px rgba(220, 38, 38, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+.sos-button:hover {
+    background: #b91c1c;
+    transform: scale(1.05);
+    border-color: #fecaca;
 }
 
 .sos-button:disabled {
-background: #cbd5e1;
-border-color: #e2e8f0;
-color: #ffffff;
-box-shadow: none;
-transform: none;
-pointer-events: none;
-}
+    background: var(--slate-400);
+    border-color: #f1f5f9;
+    box-shadow: none;
+    animation: none;
+    cursor: not-allowed;
 }
 
-/* OPTIONS */
-.options{
-margin-top:25px;
-display:none;
+/* OPTIONS & FORMS */
+.options {
+    margin-top: 30px;
+    display: none;
+    animation: slideUp 0.4s ease-out;
 }
 
-.option-btn{
-display:block;
-width:100%;
-padding:14px;
-margin:10px 0;
-border-radius:10px;
-border:none;
-cursor:pointer;
-font-weight:600;
-background:#0284c7;
-color:white;
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.option-btn:hover{
-background:#0369a1;
+.option-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    margin: 12px 0;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.2s;
+    color: white;
 }
 
-/* INPUT */
-.input-text{
-display:block;
-width:calc(100% - 20px);
-padding:12px 10px;
-margin:10px 0;
-border-radius:8px;
-border:1px solid #cbd5e1;
-font-family:'Inter', sans-serif;
-font-size:15px;
-}
-.input-text:focus{
-outline:none;
-border-color:#0284c7;
-box-shadow: 0 0 0 3px rgba(2,132,199,0.1);
+.btn-self { background: #059669; }
+.btn-self:hover { background: #047857; transform: translateY(-2px); }
+
+.btn-third { background: #d97706; }
+.btn-third:hover { background: #b45309; transform: translateY(-2px); }
+
+.btn-dispatch { background: var(--medical-red); margin-top: 20px; }
+.btn-dispatch:hover { background: #b91c1c; box-shadow: 0 4px 15px var(--red-glow); }
+
+/* INPUTS */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
 }
 
-#otherInput, #thirdPartyForm, #selfOptions{
-display:none;
+.input-group label {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--slate-800);
+    margin-bottom: 6px;
 }
 
-/* STATUS */
-.status{
-margin-top:20px;
-font-weight:600;
-color:#0b2c48;
+.input-text {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    font-family: inherit;
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: all 0.2s;
 }
 
-.success{
-color:green;
+.input-text:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
 }
 
-.back-link{
-display: block;
-text-align: left;
-margin-bottom: 20px;
-color: #64748b;
-text-decoration: none;
-font-weight: 600;
-transition: color 0.3s ease;
+.status-box {
+    margin-top: 25px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #f1f5f9;
+    font-weight: 600;
+    color: var(--slate-800);
 }
 
-.back-link:hover{
-color: #0284c7;
-}
-
-.success-screen {
-animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-from { opacity: 0; transform: scale(0.95); }
-to { opacity: 1; transform: scale(1); }
+#liveMap {
+    height: 250px;
+    width: 100%;
+    border-radius: 16px;
+    margin: 20px 0;
+    border: 2px solid #ffffff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="sos-container">
+<nav class="sos-nav">
+    <a href="dashboard.html" class="nav-brand">
+        <img src="../images/medconnect-logo.png" alt="MedConnect">
+        <div class="logo-text">Med<span>Connect</span></div>
+    </a>
+    <a href="dashboard.html" class="back-link">← Cancel SOS</a>
+</nav>
 
-<a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+<div class="main-content">
+    <div class="sos-container">
+        <h1>Emergency SOS</h1>
+        <p class="desc">Tap the button to alert the closest medical facility instantly. Our system will prioritize your medical profile.</p>
 
-<h1>Emergency SOS</h1>
+        <button class="sos-button" id="sosBtn" onclick="showOptions()">SOS</button>
 
-<p class="desc">
-Tap SOS to alert nearby hospitals instantly.
-</p>
+        <div class="options" id="options">
+            <h3 style="margin-bottom:20px; color:var(--slate-800);">Select Emergency Context</h3>
+            <button class="option-btn btn-self" onclick="showSelfOptions()">For Myself</button>
+            <button class="option-btn btn-third" onclick="showThirdPartyForm()">For Someone Else</button>
+        </div>
 
-<button class="sos-button" id="sosBtn" onclick="showOptions()">
-SOS
-</button>
+        <!-- SELF OPTIONS -->
+        <div id="selfOptions" class="options" style="text-align: left;">
+            <button class="option-btn" onclick="selectEmergency('Medical Emergency')" style="background:var(--primary);">Use Registered Medical Profile</button>
+            <button class="option-btn" onclick="showOther()" style="background:var(--slate-600);">Other (Custom Case)</button>
+            <input id="otherInput" class="input-text" placeholder="Describe emergency (e.g. Broken Limb)" style="display:none; margin-top:10px;">
+            <button class="option-btn btn-dispatch" onclick="startSOS(true)">🚨 Dispatch Ambulance</button>
+        </div>
 
-<div class="options" id="options">
-    <h3 style="margin-bottom:15px; color:#1e293b;">Who is this emergency for?</h3>
-    <button class="option-btn" onclick="showSelfOptions()" style="background:#10b981;">For Myself</button>
-    <button class="option-btn" onclick="showThirdPartyForm()" style="background:#f59e0b;">For Someone Else</button>
-</div>
+        <!-- THIRD PARTY FORM -->
+        <div id="thirdPartyForm" class="options">
+            <div class="input-group">
+                <label>Victim Condition *</label>
+                <input id="tpCondition" class="input-text" placeholder="e.g. Unconscious, chest pain">
+            </div>
+            <div class="input-group">
+                <label>Victim Name (If known)</label>
+                <input id="tpName" class="input-text" placeholder="e.g. Jane Doe">
+            </div>
+            <button class="option-btn btn-dispatch" onclick="startSOS(false)">🚨 Dispatch Ambulance</button>
+        </div>
 
-<!-- SELF OPTIONS -->
-<div id="selfOptions" style="margin-top:20px;">
-    <button class="option-btn" onclick="selectEmergency('Medical Emergency')">Use Registered Medical Profile</button>
-    <button class="option-btn" onclick="showOther()">Other Emergency</button>
-    <input id="otherInput" class="input-text" placeholder="Describe emergency (e.g., Car Crash)">
-    <button class="option-btn" onclick="startSOS(true)" style="background:#dc2626; margin-top:20px;">🚨 Dispatch Ambulance</button>
-</div>
-
-<!-- THIRD PARTY FORM -->
-<div id="thirdPartyForm" style="margin-top:20px; text-align:left;">
-    <label style="font-weight:600; font-size:14px; color:#475569;">Victim Name (Optional)</label>
-    <input id="tpName" class="input-text" placeholder="e.g. John Doe">
-    
-    <label style="font-weight:600; font-size:14px; color:#475569;">Victim Phone (Optional)</label>
-    <input id="tpPhone" class="input-text" placeholder="e.g. +1 555-0199">
-    
-    <label style="font-weight:600; font-size:14px; color:#475569;">What happened? *</label>
-    <input id="tpCondition" class="input-text" placeholder="e.g. Unconscious, bleeding">
-    
-    <button class="option-btn" onclick="startSOS(false)" style="background:#dc2626; margin-top:20px;">🚨 Dispatch Ambulance</button>
-</div>
-
-<div class="status" id="statusText">
-System ready.
-</div>
-
+        <div class="status-box" id="statusText">System Standing By</div>
+    </div>
 </div>
 
 <script src="../js/api-config.js"></script>
 <script>
-
-let selectedEmergency = "";
+let selectedEmergency = "Medical Emergency";
 let polling = null;
 
-// SHOW OPTIONS
 function showOptions(){
     document.getElementById("sosBtn").style.display = "none";
     document.querySelector(".desc").style.display = "none";
@@ -233,71 +309,45 @@ function showThirdPartyForm(){
     document.getElementById("thirdPartyForm").style.display = "block";
 }
 
-// SELECT
 function selectEmergency(type){
     selectedEmergency = type;
     document.getElementById("otherInput").style.display = "none";
 }
 
-// OTHER INPUT
 function showOther(){
     document.getElementById("otherInput").style.display = "block";
-    selectedEmergency = ""; // Reset to require input
+    selectedEmergency = "";
 }
 
-// MAIN SOS
 async function startSOS(isSelf){
-
     const status = document.getElementById("statusText");
     let emergencyType = selectedEmergency;
-    let tpName = "";
-    let tpPhone = "";
-    let tpCondition = "";
 
-    // VALIDATION LOGIC
-    if(isSelf){
-        if(document.getElementById("otherInput").style.display === "block"){
-            emergencyType = document.getElementById("otherInput").value.trim();
-        }
-        if(!emergencyType){
-            alert("Please provide or select an emergency type.");
-            return;
-        }
-    } else {
-        tpName = document.getElementById("tpName").value.trim();
-        tpPhone = document.getElementById("tpPhone").value.trim();
-        tpCondition = document.getElementById("tpCondition").value.trim();
-        if(!tpCondition){
-            alert("Please describe what happened to the victim.");
-            return;
-        }
-        emergencyType = tpCondition; // map primary emergency string
+    if(isSelf && document.getElementById("otherInput").style.display === "block"){
+        emergencyType = document.getElementById("otherInput").value.trim();
+    }
+    
+    if(!isSelf) {
+        emergencyType = document.getElementById("tpCondition").value.trim();
     }
 
-    const user_id = localStorage.getItem("user_id");
-    // #region agent log
-    fetch('http://127.0.0.1:7335/ingest/9d10bee9-2430-4471-b0be-893509ed00ae',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'1dca52'},body:JSON.stringify({sessionId:'1dca52',runId:'run-1',hypothesisId:'H5',location:'user/sos.html:191',message:'startSOS invoked',data:{hasUserId:!!user_id,selectedEmergencyLength:selectedEmergency.length},timestamp:Date.now()})}).catch(()=>{});
-    // #endregion
-
-    if(!user_id){
-        alert("Login first");
+    if(!emergencyType){
+        alert("Please describe the emergency.");
         return;
     }
 
+    const user_id = localStorage.getItem("user_id");
+    if(!user_id){ alert("Clinical authorization required. Please login."); return; }
+
     document.getElementById(isSelf ? "selfOptions" : "thirdPartyForm").style.display = "none";
+    status.innerHTML = "📡 Synchronizing Location...";
 
-    status.innerHTML = "📡 Getting location...";
-
-    // 🔥 GET LOCATION
     navigator.geolocation.getCurrentPosition(async (pos)=>{
-
         const lat = pos.coords.latitude;
         const lon = pos.coords.longitude;
+        status.innerHTML = "🔍 Scanning Nearby Clinical Partners...";
 
-        status.innerHTML = "🔍 Searching nearby hospitals...";
-
-        try{
-
+        try {
             const res = await medconnectFetch("/sos/",{
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
@@ -307,131 +357,71 @@ async function startSOS(isSelf){
                     latitude: lat,
                     longitude: lon,
                     is_for_self: isSelf,
-                    third_party_name: tpName,
-                    third_party_phone: tpPhone,
-                    third_party_condition: tpCondition
+                    third_party_name: document.getElementById("tpName")?.value || "",
+                    third_party_condition: emergencyType
                 })
             });
-            // #region agent log
-            fetch('http://127.0.0.1:7335/ingest/9d10bee9-2430-4471-b0be-893509ed00ae',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'1dca52'},body:JSON.stringify({sessionId:'1dca52',runId:'run-1',hypothesisId:'H4',location:'user/sos.html:223',message:'sos request completed',data:{status:res.status,ok:res.ok},timestamp:Date.now()})}).catch(()=>{});
-            // #endregion
 
-            if(res.ok){
-                startPolling(user_id);
-            } else {
-                alert("Error sending SOS");
-                btn.disabled=false;
-            }
-
-        }catch(err){
-            alert("Server error");
-            btn.disabled=false;
-        }
-
-    },()=>{
-        // #region agent log
-        fetch('http://127.0.0.1:7335/ingest/9d10bee9-2430-4471-b0be-893509ed00ae',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'1dca52'},body:JSON.stringify({sessionId:'1dca52',runId:'run-1',hypothesisId:'H5',location:'user/sos.html:239',message:'geolocation denied',data:{hasUserId:!!user_id},timestamp:Date.now()})}).catch(()=>{});
-        // #endregion
-        alert("Location permission denied");
-        btn.disabled=false;
-    });
+            if(res.ok) startPolling(user_id);
+            else { status.innerHTML = "⚠️ Comms failure. Retry SOS."; }
+        } catch(err) { status.innerHTML = "⚠️ System timeout."; }
+    }, () => { alert("Location access required for emergency dispatch."); });
 }
 
-// 🔥 POLLING
 function startPolling(user_id){
-
     const status = document.getElementById("statusText");
-
-    if(polling){
-        clearInterval(polling);
-    }
+    if(polling) clearInterval(polling);
 
     polling = setInterval(async ()=>{
-
-        try{
-
+        try {
             const res = await medconnectFetch(`/status/${user_id}/`);
             const data = await res.json();
 
             if(data.status === "ASSIGNED"){
-
                 clearInterval(polling);
-
-                const container = document.querySelector(".sos-container");
-                container.innerHTML = `
-                    <div class="success-screen" style="width:100%; text-align:center;">
-                        <h1 style="color: #16a34a; font-size: 32px; margin-bottom: 5px;">🚑 Ambulance Dispatched!</h1>
-                        <p style="font-size: 16px; color: #64748b; margin-top:0;">Hold tight, your driver is en route.</p>
-
-                        <div style="background: #f8fafc; padding: 15px; border-radius: 12px; margin: 15px 0; border: 1px solid #e2e8f0;">
-                            <h2 style="font-size: 22px; color: #0f172a; margin: 0; font-weight: 800;">${data.hospital}</h2>
-                            <p style="color:#ef4444; font-weight:700; margin:5px 0 0 0;">Distance: ${data.distance} km away</p>
-                        </div>
-                        
-                        <!-- 🗺️ LIVE MAP CONTAINER -->
-                        <div id="liveMap" style="height: 250px; width: 100%; border-radius: 16px; box-shadow:0 10px 20px rgba(0,0,0,0.1); margin-bottom:20px; border:2px solid white;"></div>
-
-                        <button onclick="location.href='dashboard.html'" 
-                            style="width: 100%; padding: 15px; border-radius: 12px; border: none; background: #0284c7; color: white; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease;">
-                            Return to Dashboard
-                        </button>
-                    </div>
-                `;
-
-                // 🗺️ INITIALIZE LIVE TRACKING MAP
-                setTimeout(() => {
-                    navigator.geolocation.getCurrentPosition((pos) => {
-                        const patLat = pos.coords.latitude;
-                        const patLng = pos.coords.longitude;
-                        
-                        // Fake Hospital Origin (slightly offset based on distance)
-                        const offset = (data.distance || 5) * 0.005;
-                        const hospLat = patLat + offset;
-                        const hospLng = patLng + offset;
-
-                        const map = L.map('liveMap').setView([patLat, patLng], 13);
-                        
-                        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
-                        }).addTo(map);
-
-                        // Patient Marker
-                        L.marker([patLat, patLng]).addTo(map).bindPopup("<b>You are here</b>").openPopup();
-                        
-                        // Ambulance Marker (Fake tracking movement)
-                        const ambIcon = L.icon({
-                            iconUrl: 'https://cdn-icons-png.flaticon.com/512/814/814404.png',
-                            iconSize: [40, 40],
-                        });
-
-                        const ambulanceMarker = L.marker([hospLat, hospLng], {icon: ambIcon}).addTo(map);
-                        ambulanceMarker.bindPopup("<b>" + data.hospital + " Ambulance</b> <br> En Route!");
-
-                        // Draw Route
-                        const latlngs = [
-                            [hospLat, hospLng],
-                            [patLat, patLng]
-                        ];
-                        L.polyline(latlngs, {color: '#ef4444', weight: 4, dashArray: '5, 5'}).addTo(map);
-
-                        map.fitBounds(latlngs, {padding: [30, 30]});
-
-                    });
-                }, 500);
-
-            } else if(data.status === "SEARCHING"){
-
-                status.innerHTML = "🔍 Expanding search radius...";
-
+                renderAssignedScreen(data);
+            } else {
+                status.innerHTML = "🔍 Coordinating with Facility Command...";
             }
-
-        }catch(err){
-            console.log(err);
-        }
-
-    },2000);
+        } catch(err) { console.error(err); }
+    }, 2000);
 }
 
+function renderAssignedScreen(data){
+    const container = document.querySelector(".sos-container");
+    container.innerHTML = `
+        <div class="success-screen">
+            <h1 style="color: #16a34a;">🚑 Ambulance En Route</h1>
+            <p style="color:var(--slate-600);">Clinical dispatch confirmed. Professional help is on the way.</p>
+            <div style="background: #f8fafc; padding: 20px; border-radius: 16px; margin: 20px 0; border: 1px solid #e2e8f0; text-align: left;">
+                <h3 style="margin: 0; color:var(--slate-800);">${data.hospital}</h3>
+                <p style="color:var(--medical-red); font-weight:700; margin: 5px 0 0 0;">ETA: ~${data.distance * 2} minutes (${data.distance} km away)</p>
+            </div>
+            <div id="liveMap"></div>
+            <button onclick="location.href='dashboard.html'" class="option-btn" style="background:var(--primary);">Return to Dashboard</button>
+        </div>`;
+
+    setTimeout(() => initLiveMap(data), 500);
+}
+
+function initLiveMap(data){
+    navigator.geolocation.getCurrentPosition((pos) => {
+        const patLat = pos.coords.latitude;
+        const patLng = pos.coords.longitude;
+        const hospLat = patLat + (data.distance * 0.005);
+        const hospLng = patLng + (data.distance * 0.005);
+
+        const map = L.map('liveMap').setView([patLat, patLng], 14);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+
+        L.marker([patLat, patLng]).addTo(map).bindPopup("<b>Your Location</b>").openPopup();
+        const ambIcon = L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/814/814404.png', iconSize: [40, 40] });
+        L.marker([hospLat, hospLng], {icon: ambIcon}).addTo(map).bindPopup("<b>En Route Dispatch</b>");
+
+        const route = L.polyline([[hospLat, hospLng], [patLat, patLng]], {color: '#ef4444', weight: 4, dashArray: '5, 5'}).addTo(map);
+        map.fitBounds(route.getBounds(), {padding: [30, 30]});
+    });
+}
 </script>
 
 </body>
