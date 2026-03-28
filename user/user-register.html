@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>User Registration — MedConnect</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:#eaf4fb;
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:100vh;
+padding:40px 0;
+}
+.card{
+width:480px;
+background:white;
+padding:40px;
+border-radius:18px;
+box-shadow:0 15px 40px rgba(0,0,0,.08);
+text-align:center;
+}
+.logo{
+height:55px;
+margin-bottom:15px;
+}
+h2{
+margin-bottom:20px;
+}
+input, select{
+width:100%;
+padding:14px;
+margin:8px 0;
+border-radius:10px;
+border:1px solid #cbd5e1;
+font-size:15px;
+}
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:12px;
+background:#0284c7;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+}
+button:hover{
+background:#0369a1;
+}
+.note{
+font-size:12px;
+color:#64748b;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<img src="../images/medconnect-logo.png" class="logo">
+
+<h2>Register User</h2>
+
+<input type="text" id="fullName" placeholder="Full Name" required>
+<input type="email" id="email" placeholder="Email" required>
+<input type="password" id="password" placeholder="Create Password" required>
+<input type="text" id="phone" placeholder="Contact Number" required>
+
+<select id="bloodGroup" required>
+<option value="">Blood Group</option>
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>O+</option>
+<option>O-</option>
+<option>AB+</option>
+<option>AB-</option>
+</select>
+
+<input type="text" id="allergies" placeholder="Allergies (optional)">
+<input type="text" id="medicalCondition" placeholder="Medical Condition (optional)">
+
+<input type="text" id="emergencyName" placeholder="Emergency Contact Name" required>
+<input type="text" id="emergencyPhone" placeholder="Emergency Contact Number" required>
+
+<select id="conditionSelect" onchange="handleConditionChange()" required>
+<option value="">Select Condition Type</option>
+<option value="heart">Heart Patient</option>
+<option value="diabetic">Diabetic</option>
+<option value="asthma">Asthma</option>
+<option value="none">None</option>
+<option value="other">Other</option>
+</select>
+
+<input 
+type="text" 
+id="otherCondition" 
+placeholder="Enter your condition"
+style="display:none;"
+>
+
+<p class="note">
+Your data will be securely stored and shared with hospitals only during emergencies.
+</p>
+
+<button onclick="registerUser()">
+Register User
+</button>
+
+</div>
+
+<script src="../js/api-config.js"></script>
+<script>
+
+// Show "Other" input
+function handleConditionChange() {
+    const select = document.getElementById("conditionSelect");
+    const otherInput = document.getElementById("otherCondition");
+
+    if (select.value === "other") {
+        otherInput.style.display = "block";
+    } else {
+        otherInput.style.display = "none";
+        otherInput.value = "";
+    }
+}
+
+
+// 🔥 FINAL REGISTER FUNCTION
+async function registerUser() {
+
+    const conditionType = document.getElementById("conditionSelect").value;
+    const otherCondition = document.getElementById("otherCondition").value;
+
+    // merge condition into medical_condition (backend compatible)
+    const finalCondition = conditionType === "other" ? otherCondition : conditionType;
+
+    const data = {
+        full_name: document.getElementById("fullName").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        phone: document.getElementById("phone").value,
+        blood_group: document.getElementById("bloodGroup").value,
+        allergies: document.getElementById("allergies").value,
+        medical_condition: finalCondition || document.getElementById("medicalCondition").value,
+        emergency_contact_name: document.getElementById("emergencyName").value,
+        emergency_contact_phone: document.getElementById("emergencyPhone").value
+    };
+
+    // Basic validation (no UI change)
+    if (!data.full_name || !data.email || !data.password || !data.phone) {
+        alert("Please fill all required fields");
+        return;
+    }
+
+    try {
+
+        const response = await medconnectFetch("/user/register/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert("✅ Registration Successful!");
+            window.location.href = "user-login.html";
+        } else {
+            alert("❌ Error: " + (result.error || "Registration failed"));
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("⚠️ Server error. Is backend running?");
+    }
+}
+
+</script>
+
+</body>
+</html>

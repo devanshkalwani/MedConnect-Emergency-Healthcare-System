@@ -37,7 +37,7 @@ h2{
 margin-bottom:20px;
 }
 
-input, select{
+input{
 width:100%;
 padding:14px;
 margin:8px 0;
@@ -74,28 +74,80 @@ background:#0369a1;
 
 <h2>Register Hospital</h2>
 
-<input type="text" placeholder="Hospital Name">
-<input type="text" placeholder="Hospital ID">
-<input type="email" placeholder="Official Email">
-<input type="text" placeholder="Contact Number">
-<input type="text" placeholder="City">
+<input type="text" id="name" placeholder="Hospital Name">
+<input type="email" id="email" placeholder="Official Email">
+<input type="password" id="password" placeholder="Create Password">
 
-<select>
-<option>Hospital Type</option>
-<option>Government</option>
-<option>Private</option>
-<option>Multi-Speciality</option>
-</select>
+<input type="text" id="city" placeholder="City">
+<input type="number" id="totalBeds" placeholder="Total Beds Available">
+<input type="number" id="icuBeds" placeholder="ICU Beds">
 
-<input type="number" placeholder="Total Beds Available">
-<input type="number" placeholder="ICU Beds">
-<input type="password" placeholder="Create Password">
+<!-- 🔥 IMPORTANT FOR DEMO -->
+<input type="number" id="distance" placeholder="Distance from Patient (km)">
 
-<button onclick="location.href='hospital-login.html'">
+<button onclick="registerHospital()">
 Register Hospital
 </button>
 
 </div>
+
+<script src="../js/api-config.js"></script>
+<script>
+
+async function registerHospital(){
+
+    const btn = document.querySelector("button");
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const total_beds = document.getElementById("totalBeds").value;
+    const icu_beds = document.getElementById("icuBeds").value;
+    const distance = document.getElementById("distance").value;
+
+    if(!name || !email || !password || !city || !total_beds || !icu_beds || !distance){
+        alert("Please fill all fields");
+        return;
+    }
+
+    btn.disabled = true;
+
+    try {
+
+        const res = await medconnectFetch("/hospital/register/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password,
+                city: city,
+                total_beds: total_beds,
+                icu_beds: icu_beds,
+                distance: distance
+            })
+        });
+
+        const data = await res.json();
+
+        if(res.ok){
+            alert("Hospital Registered Successfully");
+            window.location.href = "hospital-login.html";
+        } else {
+            alert(data.error || "Registration failed");
+            btn.disabled = false;
+        }
+
+    } catch (error){
+        alert("Server error. Check backend.");
+        btn.disabled = false;
+    }
+}
+
+</script>
 
 </body>
 </html>

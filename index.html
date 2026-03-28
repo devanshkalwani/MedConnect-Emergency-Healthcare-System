@@ -3,276 +3,529 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedConnect | Medical Healthcare Network</title>
 
-<title>MedConnect — Emergency Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Using Inter for a clean, clinical medical look -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<style>
+/* ================= SYSTEM RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #ffffff;
+    color: #333333;
+    overflow-x: hidden;
+    line-height: default;
+}
+
+/* ================= MEDICAL NAVBAR ================= */
+.navbar {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 2px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.nav-brand img {
+    height: 50px;
+    /* User specifically requested NO filters on the logo! */
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.logo-text span {
+    color: #0284c7; /* Trust Blue */
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #475569;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #0284c7;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background: none;
+    border: none;
+    color: #475569;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 220px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 12px 20px;
+    color: #334155;
+    font-weight: 500;
+}
+
+.dropdown-content a:hover {
+    background: #f8fafc;
+    color: #0284c7;
+}
+
+.btn-primary {
+    background: #0284c7;
+    color: white !important;
+    padding: 10px 24px !important;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: #0369a1;
+}
+
+/* ================= CLEAN HERO SECTION ================= */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 5% 60px 5%;
+    background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+    min-height: 60vh;
+}
+
+.hero-text {
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 52px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.hero h1 span {
+    color: #0284c7;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #475569;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.hero-img-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    object-fit: cover;
+}
+
+.btn-action {
+    display: inline-block;
+    background: #0284c7;
+    color: white;
+    padding: 16px 36px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 10px 20px rgba(2, 132, 199, 0.2);
+    transition: 0.3s;
+}
+
+.btn-action:hover {
+    background: #0369a1;
+    transform: translateY(-2px);
+}
+
+.btn-sos-trigger {
+    display: inline-block;
+    background: white;
+    color: #dc2626;
+    border: 2px solid #dc2626;
+    padding: 14px 34px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 15px;
+    transition: 0.3s;
+}
+
+.btn-sos-trigger:hover {
+    background: #fef2f2;
+}
+
+
+/* ================= TRUST STATS BANNER ================= */
+.stats-banner {
+    background: #e0f2fe; /* Light medical blue */
+    padding: 40px 5%;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    flex-wrap: wrap;
+    border-top: 1px solid #bae6fd;
+    border-bottom: 1px solid #bae6fd;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #0284c7;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.stat-text h3 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.stat-text p {
+    font-size: 15px;
+    color: #475569;
+    font-weight: 500;
+}
+
+/* ================= FEATURES SECTION ================= */
+.features {
+    padding: 100px 5%;
+    background: #ffffff;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.section-title h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.f-icon-circle {
+    width: 70px;
+    height: 70px;
+    background: #f0fdf4; /* Light green */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.feature-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.feature-card p {
+    color: #475569;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* ================= COMPREHENSIVE CARE SECTION ================= */
+.care-section {
+    padding: 100px 5%;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.care-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.care-content h2 {
+    font-size: 36px;
+    color: #0284c7;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.care-content p {
+    color: #334155;
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+.care-img {
+    flex: 1;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    background: #0f172a;
+    padding: 60px 5%;
+    text-align: center;
+    color: #94a3b8;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+@media(max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-img-container {
+        margin-top: 50px;
+    }
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+    .stats-banner {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    .care-section {
+        flex-direction: column;
+    }
+}
+</style>
 </head>
 
 <body>
 
+<!-- NAVBAR (CLEAN WHITE) -->
 <nav class="navbar">
+    <a href="#" class="nav-brand">
+        <!-- Exact original logo unharmed -->
+        <img src="images/medconnect-logo.png" alt="MedConnect Logo">
+    </a>
 
-  <!-- LOGO -->
-  <div class="nav-brand">
-    <img src="images/medconnect-topleft-logo.png" class="logo-icon">
-    <div class="logo-text">Med<span>Connect</span></div>
-  </div>
-
-
-  <div class="nav-menu">
-
-    <a href="#">Home</a>
-    <a href="#how">How It Works</a>
-    <a href="./hospitals.html">Hospitals</a>
-    <a href="./emergency-info.html">Emergency</a>
-
-
-    <!-- ABOUT -->
-    <div class="dropdown">
-      <button class="dropbtn" onclick="toggleDropdown('aboutMenu')">
-        About ▾
-      </button>
-
-      <div id="aboutMenu" class="dropdown-content">
-        <a href="./about.html">About MedConnect</a>
-        <a href="./mission.html">Our Mission</a>
-        <a href="./contact.html">Contact</a>
-      </div>
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#services">Health Management</a>
+        <a href="hospitals.html">Provider Resources</a>
+        <a href="#about">About Us</a>
+        
+        <div class="dropdown">
+            <button class="dropbtn btn-primary">Login Portals ▼</button>
+            <div class="dropdown-content">
+                <a href="user/user-login.html">Patient Login</a>
+                <a href="hospital/hospital-login.html">Provider Portal</a>
+                <a href="admin/admin-login.html">Administrator</a>
+            </div>
+        </div>
     </div>
-
-
-
-    <!-- LOGIN -->
-    <div class="login-dropdown" id="loginDropdown">
-    <a href="#" id="loginToggle">Login ▾</a>
-
-    <div class="dropdown-menu" id="loginMenu">
-    <a href="user/user-login.html">User Login</a>
-    <a href="hospital/hospital-login.html">Hospital Login</a>
-    <a href="admin/admin-login.html">Admin Login</a>
-    </div>
-
-    </div>
-
-
-  </div>
-
 </nav>
 
+<!-- HERO (REAL WORLD MEDICAL) -->
+<section class="hero" id="home">
+    <div class="hero-text">
+        <h1>Better Health is<br><span>on the Line</span></h1>
+        
+        <p>
+            MedConnect helps patients obtain appropriate and quality care instantly during emergencies. 
+            Our digital infrastructure bridges the gap between individuals and fully-equipped medical facilities 
+            to safeguard physical health when seconds matter most.
+        </p>
 
-
-
-<!-- ================= HERO ================= -->
-<section class="hero">
-
-  <div class="hero-mesh"></div>
-  <div class="hero-glow"></div>
-
-  <div class="hero-content">
-
-    <h1>
-      Emergency Response.<br>
-      <span>Prepared Before Arrival.</span>
-    </h1>
-
-    <p>
-      Built for critical moments when every second matters — MedConnect ensures
-      hospitals are informed, prepared, and ready before you even arrive.
-    </p>
-
-    <div class="hero-buttons">
-      <a href="#" class="primary-btn" id="getStartedBtn">Get Started</a>
-      <a href="emergency-info.html" class="sos-btn">
-      🚨 Activate SOS
-      </a>
-
-      <a href="#how" class="btn-outline">Learn More</a>
+        <a href="user/user-login.html" class="btn-action">Access Patient Hub</a>
+        <a href="user/sos.html" class="btn-sos-trigger">Activate Emergency</a>
     </div>
 
-  </div>
+    <div class="hero-img-container">
+        <!-- Clean, reassuring medical stock image -->
+        <img src="https://images.unsplash.com/photo-1551076805-e18690c5e53b?w=1200&auto=format&fit=crop&q=80" alt="Medical Team" class="hero-img">
+    </div>
 </section>
 
-
-<!-- ================= TRUST STRIP ================= -->
-<section class="trust">
-
-  <div class="trust-container">
-
-    <div class="trust-box left">
-      ✔ 500+ Hospitals Connected
+<!-- STATS BANNER (ESANJEEVANI STYLE) -->
+<div class="stats-banner">
+    <div class="stat-item">
+        <div class="stat-icon">👨‍⚕️</div>
+        <div class="stat-text">
+            <h3>1,200+</h3>
+            <p>Providers Onboarded</p>
+        </div>
     </div>
-
-    <div class="trust-box right">
-      ✔ 24/7 Emergency Network
+    <div class="stat-item">
+        <div class="stat-icon">🏥</div>
+        <div class="stat-text">
+            <h3>200+</h3>
+            <p>Patients Served</p>
+        </div>
     </div>
-
-    <div class="trust-box left">
-      ✔ Under 3 Minute Alert Time
+    <div class="stat-item">
+        <div class="stat-icon">⏱️</div>
+        <div class="stat-text">
+            <h3>< 3 Min</h3>
+            <p>Average Dispatch Time</p>
+        </div>
     </div>
+</div>
 
-    <div class="trust-box right">
-      ✔ Trusted by Families Nationwide
+<!-- FEATURES SECTION -->
+<section class="features" id="services">
+    
+    <div class="feature-grid">
+        
+        <div class="feature-card">
+            <div class="f-icon-circle">☁️</div>
+            <div>
+                <h3>Telemedicine Integration</h3>
+                <p>MedConnect is accessible via a secure internet connection from multiple devices. We provide safe, real-time emergency data transfer directly to hospital command centers.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="f-icon-circle">📂</div>
+            <div>
+                <h3>Electronic Health Records (EHR)</h3>
+                <p>Our secure system allows users to maintain their critical historical medical data, allergies, and contacts, ensuring doctors have the context they require instantly.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="f-icon-circle">🛡️</div>
+            <div>
+                <h3>HIPAA & ABDM Compliant</h3>
+                <p>Ensuring patient privacy is our top priority. Confidential personal identities and phone numbers are heavily restricted until formalized admission.</p>
+            </div>
+        </div>
+
     </div>
-
-    <!-- NEW BLOCKS -->
-
-    <div class="trust-box left">
-      ✔ Secure & Encrypted Medical Data
-    </div>
-
-    <div class="trust-box right">
-      ✔ Built for Tier-2 & Tier-3 Cities
-    </div>
-
-  </div>
-
 </section>
 
-
-
-<!-- ================= WHO MEDCONNECT HELPS ================= -->
-<section class="who">
-
-  <h2 class="section-title">Who MedConnect Helps</h2>
-
-  <div class="who-grid">
-
-    <div class="who-card">
-      <h3>👨‍👩‍👧 Families</h3>
-      <p>
-        Stay prepared for unexpected medical situations with instant access
-        to emergency-ready hospitals.
-      </p>
+<!-- COMPREHENSIVE CARE SECTION (MEDHELPLINE STYLE) -->
+<section class="care-section" id="about">
+    <div class="care-content">
+        <h2>Comprehensive Emergency Case Management</h2>
+        <p>
+            Our unconventional approach to crisis management optimizes location data 
+            to instantly identify and ping highly-capable hospitals around you. 
+            We filter hospitals based on specialized needs — from Cardiac arrests to trauma care.
+        </p>
+        <p>
+            Visit the Provider Portal to view inbound dispatch requests, check active emergency statuses, 
+            and formally process patient stabilization protocols electronically.
+        </p>
+        <br>
+        <a href="hospital/hospital-login.html" class="btn-action" style="padding: 12px 28px; font-size: 16px;">Visit Provider Portal</a>
     </div>
 
-    <div class="who-card">
-      <h3>👴 Elderly Living Alone</h3>
-      <p>
-        Rapid alerts ensure help is always within reach, providing independence
-        with safety.
-      </p>
-    </div>
-
-    <div class="who-card">
-      <h3>🏥 Hospitals</h3>
-      <p>
-        Receive critical patient data early so medical teams can prepare
-        life-saving treatment before arrival. 
-      </p>
-    </div>
-
-  </div>
-
+    <!-- Heartbeat hands/compassion stock image -->
+    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop&q=80" alt="Patient Care" class="care-img">
 </section>
 
-
-<!-- ================= HOW MEDCONNECT WORKS ================= -->
-<section class="how" id="how">
-
-  <h2 class="section-title">How MedConnect Works</h2>
-
-  <div class="how-grid">
-
-    <div class="how-card reveal">
-      <div class="icon">🚨</div>
-      <h3>Instant SOS Activation</h3>
-      <p>
-        One tap triggers the High Alert Protocol, instantly notifying nearby
-        hospitals and emergency services within seconds.
-      </p>
-    </div>
-
-    <div class="how-card reveal">
-      <div class="icon">📡</div>
-      <h3>Real-Time Data Transfer</h3>
-      <p>
-        Medical history, emergency details, and live location are securely
-        transmitted to hospitals so doctors can assess the situation in advance.
-      </p>
-    </div>
-
-    <div class="how-card reveal">
-      <div class="icon">⚕️</div>
-      <h3>Prepared Treatment</h3>
-      <p>
-        Hospitals are fully prepared when the patient arrives — eliminating
-        paperwork delays and accelerating life-saving intervention.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= WHY MEDCONNECT ================= -->
-<section class="why">
-
-  <h2 class="section-title">Why MedConnect?</h2>
-
-  <div class="why-grid">
-
-    <div class="why-card reveal">
-      <h3>⚡ Lightning Fast Response</h3>
-      <p>
-        MedConnect drastically reduces emergency response time by instantly
-        connecting patients with nearby capable hospitals during critical situations.
-      </p>
-    </div>
-
-    <div class="why-card reveal">
-      <h3>🔐 Secure Medical Identity</h3>
-      <p>
-        Essential health data is securely shared with hospitals, enabling doctors
-        to make informed decisions even before the patient arrives.
-      </p>
-    </div>
-
-    <div class="why-card reveal">
-      <h3>🏥 Smart Hospital Matching</h3>
-      <p>
-        Patients are guided to hospitals equipped to handle their specific
-        emergency — not just the nearest one.
-      </p>
-    </div>
-
-    <div class="why-card reveal">
-      <h3>👴 Built for the Vulnerable</h3>
-      <p>
-        Designed especially for elderly individuals and high-risk users,
-        strengthening preparedness and providing reassurance to families.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= EMERGENCY NUMBERS ================= -->
-<section class="emergency">
-
-  <h2>National Emergency Numbers</h2>
-
-  <div class="numbers">
-    <div>🚑 Ambulance — 102 / 108</div>
-    <div>👮 Police — 100</div>
-    <div>🔥 Fire — 101</div>
-    <div>🚨 Disaster Management — 112</div>
-    <div>🩺 Health Helpline — 104</div>
-  </div>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
+<!-- FOOTER -->
 <footer>
-© 2026 MedConnect — Intelligent Emergency Infrastructure
+    <p>We comply with all National Telemedicine Practice Guidelines (2025).</p>
+    <p>© 2026 MedConnect Healthcare Solutions. All Rights Reserved.</p>
 </footer>
-
-<script src="js/script.js"></script>
 
 </body>
 </html>

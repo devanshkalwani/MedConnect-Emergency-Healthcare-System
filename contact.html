@@ -10,16 +10,12 @@
 
 <style>
 
-/* BODY */
-
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
 background:linear-gradient(135deg,#eef6fb,#e0eff9,#d7eaf7);
 color:#0f172a;
 }
-
-/* NAVBAR */
 
 .navbar{
 height:70px;
@@ -36,31 +32,12 @@ text-decoration:none;
 color:#0369a1;
 font-weight:600;
 margin-right:20px;
-transition:0.2s;
 }
-
-.back:hover{
-color:#0284c7;
-}
-
-/* HERO */
 
 .hero{
 text-align:center;
 padding:60px 20px 30px;
 }
-
-.hero h1{
-font-size:42px;
-margin-bottom:10px;
-}
-
-.hero p{
-color:#475569;
-font-size:17px;
-}
-
-/* CONTAINER */
 
 .container{
 max-width:1100px;
@@ -71,23 +48,12 @@ grid-template-columns:1fr 1fr;
 gap:40px;
 }
 
-/* CARD */
-
 .card{
-background:rgba(255,255,255,0.75);
-backdrop-filter:blur(15px);
+background:rgba(255,255,255,0.85);
 padding:35px;
 border-radius:18px;
 box-shadow:0 15px 40px rgba(2,132,199,0.12);
-transition:0.3s;
 }
-
-.card:hover{
-transform:translateY(-6px);
-box-shadow:0 20px 50px rgba(2,132,199,0.18);
-}
-
-/* CONTACT INFO */
 
 .info-item{
 margin-bottom:20px;
@@ -96,26 +62,17 @@ margin-bottom:20px;
 .info-title{
 font-weight:600;
 color:#0369a1;
-margin-bottom:5px;
 }
-
-.info-value{
-color:#334155;
-}
-
-/* EMERGENCY BADGE */
 
 .emergency{
-background:linear-gradient(135deg,#dc2626,#ef4444);
+background:#ef4444;
 color:white;
-padding:6px 14px;
+padding:5px 12px;
 border-radius:20px;
+font-size:12px;
 display:inline-block;
-font-size:13px;
-margin-top:6px;
+margin-top:5px;
 }
-
-/* FORM */
 
 form{
 display:flex;
@@ -127,54 +84,27 @@ input,textarea{
 padding:12px;
 border-radius:10px;
 border:1px solid #cbd5e1;
-font-size:15px;
-outline:none;
-transition:0.2s;
 }
-
-input:focus,textarea:focus{
-border-color:#0284c7;
-box-shadow:0 0 0 2px rgba(2,132,199,0.15);
-}
-
-textarea{
-resize:none;
-height:120px;
-}
-
-/* BUTTON */
 
 button{
-background:linear-gradient(135deg,#0284c7,#0ea5e9);
+background:#0284c7;
 color:white;
 border:none;
 padding:12px;
 border-radius:10px;
-font-size:16px;
 cursor:pointer;
-transition:0.25s;
 }
-
-button:hover{
-transform:translateY(-2px);
-box-shadow:0 10px 20px rgba(2,132,199,0.2);
-}
-
-/* FOOTER */
-
-footer{
-text-align:center;
-padding:30px;
-color:#64748b;
-}
-
-/* SUCCESS MESSAGE */
 
 .success{
 display:none;
 color:#16a34a;
-margin-top:10px;
-font-weight:500;
+font-weight:600;
+}
+
+.error{
+display:none;
+color:#dc2626;
+font-weight:600;
 }
 
 </style>
@@ -194,55 +124,47 @@ font-weight:500;
 
 <div class="container">
 
-<!-- CONTACT INFO -->
-
+<!-- INFO -->
 <div class="card">
 
 <h2>Emergency Contact Information</h2>
 
 <div class="info-item">
 <div class="info-title">Emergency Hotline</div>
-<div class="info-value">+91 9876543210</div>
-<div class="emergency">24/7 Emergency Priority Line</div>
+<div>+91 9876543210</div>
+<div class="emergency">24/7 Priority Line</div>
 </div>
 
 <div class="info-item">
-<div class="info-title">Email Support</div>
-<div class="info-value">support@medconnect.com</div>
-</div>
-
-<div class="info-item">
-<div class="info-title">Operations Center</div>
-<div class="info-value">MedConnect Emergency Network, India</div>
-</div>
-
-<div class="info-item">
-<div class="info-title">Availability</div>
-<div class="info-value">24 hours, 7 days a week</div>
+<div class="info-title">Email</div>
+<div>support@medconnect.com</div>
 </div>
 
 </div>
 
-<!-- CONTACT FORM -->
-
+<!-- FORM -->
 <div class="card">
 
 <h2>Send Message</h2>
 
 <form onsubmit="submitForm(event)">
 
-<input type="text" placeholder="Full Name" required>
+<input type="text" id="name" placeholder="Full Name" required>
 
-<input type="email" placeholder="Email Address" required>
+<input type="email" id="email" placeholder="Email Address" required>
 
-<input type="text" placeholder="Phone Number">
+<input type="text" id="phone" placeholder="Phone Number">
 
-<textarea placeholder="Describe your issue or request..." required></textarea>
+<textarea id="message" placeholder="Describe your issue..." required></textarea>
 
 <button type="submit">Send Message</button>
 
 <div class="success" id="successMsg">
-Message sent successfully. MedConnect team will contact you.
+✅ Message sent successfully!
+</div>
+
+<div class="error" id="errorMsg">
+❌ Failed to send message
 </div>
 
 </form>
@@ -251,16 +173,76 @@ Message sent successfully. MedConnect team will contact you.
 
 </div>
 
-<footer>
-© 2026 MedConnect Emergency Infrastructure
+<footer style="text-align:center;padding:30px;">
+© 2026 MedConnect
 </footer>
 
+<script src="js/api-config.js"></script>
 <script>
 
-function submitForm(e){
-e.preventDefault();
-document.getElementById("successMsg").style.display="block";
+const BASE_URL = window.MEDCONNECT_API_BASE || "http://127.0.0.1:8001/api";
+
+// 🔥 AUTO FILL USER DATA
+async function loadUser(){
+
+    const user_id = localStorage.getItem("user_id");
+
+    if(!user_id) return;
+
+    try{
+        const res = await medconnectFetch(`/user/${user_id}/`);
+        const data = await res.json();
+
+        document.getElementById("name").value = data.first_name || "";
+        document.getElementById("email").value = data.email || "";
+        document.getElementById("phone").value = data.phone || "";
+
+    }catch(err){
+        console.log(err);
+    }
 }
+
+
+// 🔥 SUBMIT FORM
+async function submitForm(e){
+
+    e.preventDefault();
+
+    const success = document.getElementById("successMsg");
+    const error = document.getElementById("errorMsg");
+
+    success.style.display = "none";
+    error.style.display = "none";
+
+    const body = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        message: document.getElementById("message").value
+    };
+
+    try{
+
+        const res = await medconnectFetch("/contact/", {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(body)
+        });
+
+        if(res.ok){
+            success.style.display = "block";
+        } else {
+            error.style.display = "block";
+        }
+
+    }catch(err){
+        error.style.display = "block";
+    }
+}
+
+loadUser();
 
 </script>
 

@@ -7,140 +7,201 @@
 
 <link rel="stylesheet" href="../css/styles.css">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
 
-body{
-margin:0;
-font-family:"Segoe UI",sans-serif;
-background:linear-gradient(180deg,#eef4fa,#e6edf5);
+body {
+margin: 0;
+font-family: 'Inter', sans-serif;
+background: #f8fafc;
+color: #334155;
 }
 
-/* Layout */
-.container{
-display:flex;
-min-height:100vh;
+.container {
+display: flex;
+min-height: 100vh;
 }
 
-/* Sidebar */
-.sidebar{
-width:260px;
-background:linear-gradient(180deg,#0b2c48,#124a78);
-padding:25px;
-color:white;
-display:flex;
-flex-direction:column;
+/* 🔥 CLINICAL SIDEBAR */
+.sidebar {
+width: 280px;
+background: #ffffff;
+border-right: 1px solid #e2e8f0;
+padding: 40px 25px;
+color: #334155;
+display: flex;
+flex-direction: column;
+box-shadow: 2px 0 10px rgba(0,0,0,0.02);
+z-index: 10;
 }
 
-.sidebar img{
-width:170px;
-margin-bottom:30px;
+.logo img {
+width: 170px;
+margin-bottom: 40px;
+align-self: center;
 }
 
-.sidebar a{
-display:block;
-color:white;
-text-decoration:none;
-padding:14px;
-border-radius:10px;
-margin-bottom:8px;
+.sidebar a {
+color: #475569;
+text-decoration: none;
+padding: 14px 20px;
+border-radius: 8px;
+margin-bottom: 8px;
+font-weight: 500;
+font-size: 15px;
+transition: all 0.2s;
 }
 
-.sidebar a:hover{
-background:rgba(255,255,255,0.1);
+.sidebar a:hover {
+background: #f1f5f9;
+color: #0284c7;
 }
 
-.logout{
-margin-top:auto;
-background:#e63946;
-text-align:center;
+.sidebar a.active {
+background: #e0f2fe;
+color: #0284c7;
+font-weight: 600;
 }
 
-/* Main */
-.main{
-flex:1;
-padding:40px;
+.logout {
+margin-top: auto;
+background: #fee2e2 !important;
+color: #dc2626 !important;
+text-align: center;
+font-weight: 700 !important;
 }
 
-/* Header */
-.header{
-background:white;
-padding:20px 30px;
-border-radius:12px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-margin-bottom:25px;
+.logout:hover {
+background: #fecaca !important;
 }
 
-.header h1{
-margin:0;
-color:#0b2c48;
+/* MAIN CONTENT */
+.main {
+flex: 1;
+padding: 50px 60px;
+max-width: 1000px;
 }
 
-/* Contact Card */
-.contact-card{
-background:white;
-padding:25px;
-border-radius:14px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-margin-bottom:20px;
+.header {
+background: #ffffff;
+padding: 30px 40px;
+border-radius: 12px;
+box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+margin-bottom: 40px;
+border: 1px solid #e2e8f0;
 }
 
-.contact{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:12px 0;
-border-bottom:1px solid #eee;
+.header h1 {
+margin: 0 0 10px 0;
+font-weight: 800;
+font-size: 32px;
 }
 
-.contact:last-child{
-border-bottom:none;
+.header p {
+margin: 0;
+color: #64748b;
+font-size: 18px;
 }
 
-.contact-name{
-font-weight:600;
-color:#0b2c48;
+.contact-card, .form {
+background: #ffffff;
+padding: 35px;
+border-radius: 12px;
+box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+border: 1px solid #e2e8f0;
+margin-bottom: 30px;
 }
 
-.contact-phone{
-color:#555;
+.contact {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 16px 0;
+border-bottom: 1px solid #e2e8f0;
 }
 
-/* Add Contact Form */
-.form{
-background:white;
-padding:25px;
-border-radius:14px;
-box-shadow:0 6px 16px rgba(0,0,0,0.08);
-margin-top:25px;
+.contact:last-child {
+border-bottom: none;
+padding-bottom: 0;
 }
 
-.form input{
-width:100%;
-padding:10px;
-margin-bottom:15px;
-border-radius:8px;
-border:1px solid #ccc;
+.contact-name {
+font-weight: 700;
+font-size: 18px;
+color: #0f172a;
 }
 
-.add-btn{
-padding:12px 18px;
-background:#0b2c48;
-color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
+.contact-phone {
+color: #64748b;
+font-size: 16px;
+margin-top: 4px;
 }
 
-.add-btn:hover{
-background:#124a78;
+.form h3 {
+margin: 0 0 20px 0;
+font-size: 20px;
+font-weight: 800;
 }
 
-.back{
-display:inline-block;
-margin-top:20px;
-text-decoration:none;
-font-weight:600;
-color:#0b2c48;
+.form input {
+width: 100%;
+padding: 14px 16px;
+margin-bottom: 15px;
+border-radius: 8px;
+border: 1px solid #cbd5e1;
+font-size: 16px;
+font-family: 'Inter', sans-serif;
+background: #f8fafc;
+transition: all 0.2s;
+box-sizing: border-box;
+}
+
+.form input:focus {
+outline: none;
+border-color: #0284c7;
+background: white;
+box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
+}
+
+.add-btn {
+margin-top: 10px;
+padding: 14px 30px;
+background: #0284c7;
+color: white;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+font-weight: 700;
+font-size: 16px;
+font-family: 'Inter', sans-serif;
+transition: all 0.2s;
+width: 100%;
+}
+
+.add-btn:hover {
+background: #0369a1;
+transform: translateY(-2px);
+box-shadow: 0 15px 30px rgba(2, 132, 199, 0.3);
+}
+
+.back {
+display: inline-block;
+margin-bottom: 25px;
+text-decoration: none;
+font-weight: 700;
+color: #64748b;
+padding: 12px 20px;
+background: white;
+border-radius: 12px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+transition: all 0.2s;
+}
+
+.back:hover {
+color: #0284c7;
+box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+transform: translateY(-2px);
 }
 
 </style>
@@ -149,85 +210,148 @@ color:#0b2c48;
 
 <div class="container">
 
-<!-- Sidebar -->
 <div class="sidebar">
 
+<div class="logo">
 <img src="../images/medconnect-logo.png">
+</div>
 
-<a href="dashboard.html">Dashboard</a>
-<a href="sos.html">Emergency SOS</a>
-<a href="alert-history.html">Alert History</a>
-<a href="profile.html">Medical Profile</a>
-<a href="pharmacy.html">Pharmacy</a>
-<a href="contacts.html">Emergency Contacts</a>
-<a href="../hospitals.html">Nearby Hospitals</a>
-<a href="settings.html">Settings</a>
+<a href="dashboard.html">🏠 Dashboard</a>
+<a href="sos.html">🚨 Emergency SOS</a>
+<a href="alert-history.html">📋 Alert History</a>
+<a href="profile.html">👤 Medical Profile</a>
+<a href="contacts.html" class="active">📞 Emergency Contacts</a>
+<a href="../hospitals.html">🏥 Nearby Hospitals</a>
 
-<a href="../index.html" class="logout">Logout</a>
+<a href="../index.html" class="logout">Log Out</a>
 
 </div>
 
-<!-- Main -->
 <div class="main">
+
+<a href="dashboard.html" class="back">
+← Back to Dashboard
+</a>
 
 <div class="header">
 <h1>Emergency Contacts</h1>
 <p>These contacts will be notified automatically during SOS activation.</p>
 </div>
 
-
-<!-- Existing Contacts -->
-
-<div class="contact-card">
-
-<div class="contact">
-<div>
-<div class="contact-name">Mother</div>
-<div class="contact-phone">+91 9876543210</div>
-</div>
+<!-- 🔥 CONTACT LIST -->
+<div class="contact-card" id="contactList">
 </div>
 
-<div class="contact">
-<div>
-<div class="contact-name">Father</div>
-<div class="contact-phone">+91 9876543211</div>
-</div>
-</div>
-
-<div class="contact">
-<div>
-<div class="contact-name">Family Doctor</div>
-<div class="contact-phone">+91 9876543212</div>
-</div>
-</div>
-
-</div>
-
-
-<!-- Add New Contact -->
-
+<!-- 🔥 ADD CONTACT -->
 <div class="form">
 
 <h3>Add New Contact</h3>
 
-<input type="text" placeholder="Contact Name">
+<input type="text" id="name" placeholder="Contact Name">
+<input type="text" id="phone" placeholder="Phone Number">
 
-<input type="text" placeholder="Phone Number">
-
-<button class="add-btn" onclick="alert('Contact added successfully')">
+<button class="add-btn" onclick="addContact()">
 Add Contact
 </button>
 
 </div>
 
-
-<a href="dashboard.html" class="back">
-← Back to Dashboard
-</a>
-
-
 </div>
 </div>
+
+<script src="../js/api-config.js"></script>
+<script>
+
+// 🔥 LOAD CONTACTS
+async function loadContacts(){
+
+    const user_id = localStorage.getItem("user_id");
+
+    if(!user_id){
+        alert("Please login first");
+        return;
+    }
+
+    try {
+
+        const res = await medconnectFetch(`/contacts/${user_id}/`);
+        const data = await res.json();
+
+        const container = document.getElementById("contactList");
+        container.innerHTML = "";
+
+        if(!data || data.length === 0){
+            container.innerHTML = "<p>No contacts added</p>";
+            return;
+        }
+
+        data.forEach(c => {
+
+            container.innerHTML += `
+                <div class="contact">
+                    <div>
+                        <div class="contact-name">${c.name}</div>
+                        <div class="contact-phone">${c.phone}</div>
+                    </div>
+                </div>
+            `;
+        });
+
+    } catch (error){
+        console.log(error);
+    }
+}
+
+
+// 🔥 ADD CONTACT
+async function addContact(){
+
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const user_id = localStorage.getItem("user_id");
+
+    if(!name || !phone){
+        alert("Enter all fields");
+        return;
+    }
+
+    try {
+
+        const res = await medconnectFetch("/contacts/add/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                user_id: user_id,
+                name: name,
+                phone: phone
+            })
+        });
+
+        const data = await res.json();
+
+        if(res.ok){
+
+            alert("Contact added successfully");
+
+            document.getElementById("name").value = "";
+            document.getElementById("phone").value = "";
+
+            loadContacts();
+
+        } else {
+            alert(data.error || "Failed to add contact");
+        }
+
+    } catch (error){
+        alert("Server error");
+    }
+}
+
+loadContacts();
+
+</script>
 
 </body>
 </html>

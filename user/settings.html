@@ -16,7 +16,6 @@ font-family:"Segoe UI",sans-serif;
 background:linear-gradient(180deg,#eef4fa,#e6edf5);
 }
 
-/* Layout */
 .container{
 display:flex;
 min-height:100vh;
@@ -62,7 +61,6 @@ flex:1;
 padding:40px;
 }
 
-/* Header */
 .header{
 background:white;
 padding:20px 30px;
@@ -71,7 +69,6 @@ box-shadow:0 6px 16px rgba(0,0,0,0.08);
 margin-bottom:25px;
 }
 
-/* Settings Cards */
 .settings-card{
 background:white;
 padding:25px;
@@ -94,10 +91,9 @@ border-radius:8px;
 border:1px solid #ccc;
 }
 
-/* Button */
 .save-btn{
 padding:12px 20px;
-background:#0b2c48;
+background:#0284c7;
 color:white;
 border:none;
 border-radius:8px;
@@ -105,15 +101,20 @@ cursor:pointer;
 }
 
 .save-btn:hover{
-background:#124a78;
+background:#0369a1;
 }
 
 .back{
 display:inline-block;
-margin-top:20px;
+margin-bottom:20px;
 text-decoration:none;
 font-weight:600;
-color:#0b2c48;
+color:#64748b;
+transition: color 0.3s ease;
+}
+
+.back:hover{
+color:#0284c7;
 }
 
 </style>
@@ -124,7 +125,6 @@ color:#0b2c48;
 <div class="container">
 
 <!-- Sidebar -->
-
 <div class="sidebar">
 
 <img src="../images/medconnect-logo.png">
@@ -133,94 +133,220 @@ color:#0b2c48;
 <a href="sos.html">Emergency SOS</a>
 <a href="alert-history.html">Alert History</a>
 <a href="profile.html">Medical Profile</a>
-<a href="pharmacy.html">Pharmacy</a>
 <a href="contacts.html">Emergency Contacts</a>
-<a href="../hospitals.html">Nearby Hospitals</a>
 <a href="settings.html">Settings</a>
 
 <a href="../index.html" class="logout">Logout</a>
 
 </div>
 
-
 <!-- Main -->
-
 <div class="main">
+
+<a href="dashboard.html" class="back">
+← Back to Dashboard
+</a>
 
 <div class="header">
 <h1>Account Settings</h1>
 <p>Manage your account and emergency preferences.</p>
 </div>
 
-
 <!-- Account Info -->
-
 <div class="settings-card">
 
 <h3>Account Information</h3>
 
 <label>Email</label>
-<input type="email" value="user@medconnect.com">
+<input type="email" id="email">
 
 <label>Phone Number</label>
-<input type="text" value="+91 9876543210">
+<input type="text" id="phone">
 
-<button class="save-btn" onclick="alert('Account info updated')">
+<button class="save-btn" onclick="updateAccount()">
 Update Information
 </button>
 
 </div>
 
-
 <!-- Change Password -->
-
 <div class="settings-card">
 
 <h3>Change Password</h3>
 
 <label>Current Password</label>
-<input type="password">
+<input type="password" id="currentPass">
 
 <label>New Password</label>
-<input type="password">
+<input type="password" id="newPass">
 
 <label>Confirm New Password</label>
-<input type="password">
+<input type="password" id="confirmPass">
 
-<button class="save-btn" onclick="alert('Password changed successfully')">
+<button class="save-btn" onclick="changePassword()">
 Change Password
 </button>
 
 </div>
 
-
 <!-- Emergency Preferences -->
-
 <div class="settings-card">
 
 <h3>Emergency Preferences</h3>
 
-<label>Default Emergency Contact</label>
-<input type="text" value="Mother">
+<label>Preferred Contact</label>
+<input type="text" id="prefContact">
 
 <label>Preferred Hospital</label>
-<input type="text" value="Apollo Hospital">
+<input type="text" id="prefHospital">
 
-<button class="save-btn" onclick="alert('Preferences saved')">
+<button class="save-btn" onclick="savePreferences()">
 Save Preferences
 </button>
 
 </div>
 
-
-<a href="dashboard.html" class="back">
-← Back to Dashboard
-</a>
-
-
 </div>
 
 </div>
+
+<script src="../js/api-config.js"></script>
+<script>
+
+// 🔥 LOAD SETTINGS
+async function loadSettings(){
+
+    const user_id = localStorage.getItem("user_id");
+
+    if(!user_id){
+        alert("Login first");
+        return;
+    }
+
+    try{
+
+        const res = await medconnectFetch(`/user/${user_id}/`);
+        const data = await res.json();
+
+        document.getElementById("email").value = data.email || "";
+        document.getElementById("phone").value = data.phone || "";
+        document.getElementById("prefContact").value = data.pref_contact || "";
+        document.getElementById("prefHospital").value = data.pref_hospital || "";
+
+    } catch(err){
+        console.log(err);
+    }
+}
+
+
+// 🔥 UPDATE ACCOUNT
+async function updateAccount(){
+
+    const user_id = localStorage.getItem("user_id");
+
+    const body = {
+        user_id: user_id,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value
+    };
+
+    try{
+
+        const res = await medconnectFetch("/user/update/", {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(body)
+        });
+
+        if(res.ok){
+            alert("Account updated successfully");
+        } else {
+            alert("Update failed");
+        }
+
+    } catch(err){
+        alert("Server error");
+    }
+}
+
+
+// 🔥 CHANGE PASSWORD
+async function changePassword(){
+
+    const user_id = localStorage.getItem("user_id");
+
+    const current = document.getElementById("currentPass").value;
+    const newPass = document.getElementById("newPass").value;
+    const confirm = document.getElementById("confirmPass").value;
+
+    if(newPass !== confirm){
+        alert("Passwords do not match");
+        return;
+    }
+
+    try{
+
+        const res = await medconnectFetch("/user/change-password/", {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
+                user_id: user_id,
+                current_password: current,
+                new_password: newPass
+            })
+        });
+
+        if(res.ok){
+            alert("Password changed successfully");
+        } else {
+            alert("Incorrect current password");
+        }
+
+    } catch(err){
+        alert("Server error");
+    }
+}
+
+
+// 🔥 SAVE PREFERENCES
+async function savePreferences(){
+
+    const user_id = localStorage.getItem("user_id");
+
+    const body = {
+        user_id: user_id,
+        pref_contact: document.getElementById("prefContact").value,
+        pref_hospital: document.getElementById("prefHospital").value
+    };
+
+    try{
+
+        const res = await medconnectFetch("/user/preferences/", {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(body)
+        });
+
+        if(res.ok){
+            alert("Preferences saved successfully");
+        } else {
+            alert("Failed to save preferences");
+        }
+
+    } catch(err){
+        alert("Server error");
+    }
+}
+
+loadSettings();
+
+</script>
 
 </body>
 </html>

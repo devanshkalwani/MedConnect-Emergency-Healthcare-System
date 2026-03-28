@@ -8,8 +8,6 @@
 
 <style>
 
-/* SAME CSS AS USER LOGIN */
-
 *{
 margin:0;
 padding:0;
@@ -97,12 +95,14 @@ font-weight:600;
 
 <img src="../images/medconnect-logo.png" class="logo">
 
-<h2>Hospital Control Login</h2>
+<h2>Hospital Command Center</h2>
 
-<input type="text" placeholder="Hospital ID">
-<input type="password" placeholder="Password">
+<div id="errorMsg" style="display:none; color:#ef4444; background:#fee2e2; padding:12px; border-radius:10px; margin-bottom:15px; font-weight:600; font-size:14px;"></div>
 
-<button onclick="location.href='dashboard.html'">
+<input type="email" id="email" placeholder="Hospital Email">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="loginHospital()" id="loginBtn">
 Login to Command Center
 </button>
 
@@ -111,6 +111,77 @@ New Hospital? <a href="hospital-register.html">Register Here</a>
 </div>
 
 </div>
+
+<script src="../js/api-config.js"></script>
+<script>
+
+async function loginHospital(){
+
+    const btn = document.getElementById("loginBtn");
+    const errorMsg = document.getElementById("errorMsg");
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    errorMsg.style.display = "none";
+
+    if(!email || !password){
+        errorMsg.innerText = "Please enter your email and password.";
+        errorMsg.style.display = "block";
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = "⏳ Verifying...";
+    btn.style.opacity = "0.8";
+
+    try {
+
+        const res = await medconnectFetch("/hospital/login/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+
+        const data = await res.json();
+
+        if(res.ok){
+
+            sessionStorage.setItem("hospital_id", data.hospital_id);
+            sessionStorage.setItem("hospital_name", data.hospital_name);
+            sessionStorage.setItem("total_beds", data.total_beds);
+            sessionStorage.setItem("icu_beds", data.icu_beds);
+            
+            btn.innerHTML = "✅ Success";
+            btn.style.background = "#16a34a";
+            
+            setTimeout(() => {
+                window.location.href = "dashboard.html";
+            }, 500);
+
+        } else {
+            errorMsg.innerText = data.error || "Invalid login credentials";
+            errorMsg.style.display = "block";
+            btn.disabled = false;
+            btn.innerHTML = "Login to Command Center";
+            btn.style.opacity = "1";
+        }
+
+    } catch (error){
+        errorMsg.innerText = "Server error. Ensure backend is running.";
+        errorMsg.style.display = "block";
+        btn.disabled = false;
+        btn.innerHTML = "Login to Command Center";
+        btn.style.opacity = "1";
+    }
+}
+
+</script>
 
 </body>
 </html>

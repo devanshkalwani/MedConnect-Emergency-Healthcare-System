@@ -2,76 +2,148 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hospital Dashboard — MedConnect</title>
+<title>Command Center | MedConnect Dispatch</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- LEAFLET MAPS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
 
 body{
 margin:0;
-font-family:'Poppins',sans-serif;
-background:#f1f7fc;
+font-family:'Inter',sans-serif;
+background:#f8fafc;
+color:#334155;
+min-height: 100vh;
 }
-
-/* NAV */
 
 .nav{
-background:#0284c7;
-color:white;
-padding:20px 8%;
-font-size:22px;
+background:#ffffff;
+border-bottom: 2px solid #e2e8f0;
+color:#0f172a;
+padding:15px 5%;
+font-size:20px;
 font-weight:700;
+display: flex;
+justify-content: space-between;
+align-items: center;
+box-shadow: 0 4px 6px rgba(0,0,0,0.02);
 }
 
-/* CONTAINER */
-
-.container{
-padding:60px 8%;
-text-align:center;
+.nav span {
+color: #dc2626;
+font-size: 14px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 1px;
 }
 
-h1{
-font-size:32px;
-margin-bottom:40px;
+.dashboard-wrapper {
+display: flex;
+height: calc(100vh - 61px);
 }
 
-/* ALERT */
-
-.alert{
-margin:30px auto;
-width:420px;
-padding:22px;
-background:#fee2e2;
-border-radius:16px;
-color:#991b1b;
-font-weight:600;
+.sidebar {
+width: 450px;
+background: #ffffff;
+border-right: 1px solid #e2e8f0;
+padding: 24px;
+overflow-y: auto;
 }
 
-/* CARDS */
-
-.grid{
-display:flex;
-justify-content:center;
-gap:30px;
-flex-wrap:wrap;
-margin-top:40px;
+.map-container {
+flex: 1;
+background: #e2e8f0;
+position: relative;
 }
 
-.card{
-width:260px;
-background:white;
-padding:30px;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,.06);
+#dispatchMap {
+width: 100%;
+height: 100%;
+}
+
+.pulse-alert {
+background: #fef2f2;
+border: 1px solid #fecaca;
+color: #dc2626;
+padding: 16px;
+border-radius: 8px;
+font-weight: 600;
+margin-bottom: 20px;
+}
+
+.sos-card{
+background: #ffffff;
+border: 1px solid #e2e8f0;
+padding: 20px;
+border-radius: 12px;
+margin-bottom: 15px;
+box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+transition: all 0.2s ease;
+}
+
+.sos-card:hover {
+border-color: #93c5fd;
+box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+}
+
+.sos-card b {
+color: #64748b;
+font-weight: 600;
+font-size: 14px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.sos-card span.data {
+color: #0f172a;
+font-size: 16px;
+font-weight: 700;
+}
+
+.btn-accept {
+width: 100%;
+margin-top:20px;
+padding:14px;
+border:none;
+background:#dc2626;
+color:white;
+border-radius:8px;
 cursor:pointer;
-font-size:18px;
-font-weight:600;
+font-family: 'Inter', sans-serif;
+font-weight: 700;
+font-size: 16px;
+transition: background 0.2s;
 }
 
-.card:hover{
-transform:translateY(-6px);
+.btn-accept:hover {
+background:#b91c1c;
 }
+
+/* Stats Overlay */
+.stats-overlay {
+position: absolute;
+top: 20px;
+right: 20px;
+z-index: 1000;
+display: flex;
+gap: 15px;
+}
+.stat-box {
+background: #ffffff;
+border: 1px solid #e2e8f0;
+box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+padding: 15px 20px;
+border-radius: 12px;
+min-width: 120px;
+text-align: center;
+}
+.stat-box .title { color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;}
+.stat-box .value { color: #0f172a; font-size: 24px; font-weight: 800; margin-top:5px; }
 
 </style>
 </head>
@@ -79,38 +151,295 @@ transform:translateY(-6px);
 <body>
 
 <div class="nav">
-MedConnect Hospital Portal
+    <div id="hospitalNav">MedConnect Dispatch</div>
+    <span>LIVE RADAR ACTIVE</span>
 </div>
 
-<div class="container">
+<div class="dashboard-wrapper">
+    
+    <!-- LEFT PANEL: ALERTS -->
+    <div class="sidebar">
+        <h2 style="font-size:20px; margin-top:0; margin-bottom:20px; border-bottom:1px solid #1e293b; padding-bottom:15px;">Active Emergency Radar</h2>
+        
+        <div class="pulse-alert" id="radarStatus">
+            📡 Scanning for SOS Beacons...
+        </div>
 
-<h1>Hospital Command Center</h1>
+        <div id="sosList"></div>
+    </div>
 
-<div class="alert">
-🚨 Incoming Emergency Alert
+    <!-- RIGHT PANEL: MAP & STATS -->
+    <div class="map-container">
+        <div id="dispatchMap"></div>
+
+        <div class="stats-overlay">
+            <div class="stat-box">
+                <div class="title">Total Beds</div>
+                <div class="value" id="statTotalBeds">-</div>
+            </div>
+            <div class="stat-box">
+                <div class="title">ICU Available</div>
+                <div class="value" id="statIcuBeds">-</div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<div class="grid">
+<script src="../js/api-config.js"></script>
+<script>
 
-<div class="card">
-Incoming Patients
-</div>
+let lastSOSDataStr = "";
+let dispatchMap = null;
+let markersLayer = null;
 
-<div class="card">
-Bed Availability
-</div>
+// 🔥 INIT LEAFLET MAP
+function initMap() {
+    dispatchMap = L.map('dispatchMap').setView([40.7128, -74.0060], 12);
+    // Light Map Tile Layer
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: 'Map data &copy; OpenStreetMap'
+    }).addTo(dispatchMap);
+    
+    markersLayer = L.layerGroup().addTo(dispatchMap);
+}
 
-<div class="card">
-Doctors On Duty
-</div>
+// 🔥 LOAD SOS FROM BACKEND
+async function loadSOS(){
 
-<div class="card">
-Emergency History
-</div>
+    const hospital_id = sessionStorage.getItem("hospital_id");
+    const hospital_name = sessionStorage.getItem("hospital_name");
 
-</div>
+    if(hospital_name) {
+        document.getElementById("hospitalNav").innerText = hospital_name + " Dispatch Center";
+    }
 
-</div>
+    const totalBeds = sessionStorage.getItem("total_beds") || "N/A";
+    const icuBeds = sessionStorage.getItem("icu_beds") || "N/A";
+    document.getElementById("statTotalBeds").innerText = totalBeds;
+    document.getElementById("statIcuBeds").innerText = icuBeds;
+
+    const container = document.getElementById("sosList");
+
+    if(!hospital_id){
+        container.innerHTML = `
+            <div style="
+                margin:20px auto;
+                padding:20px;
+                width:400px;
+                background:#fef3c7;
+                border-radius:12px;
+                color:#92400e;
+                font-weight:500;
+            ">
+                ⚠️ Hospital not logged in
+            </div>
+        `;
+        return;
+    }
+
+    try {
+
+        const res = await medconnectFetch("/hospital/sos/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                hospital_id: hospital_id
+            })
+        });
+
+        const data = await res.json();
+        const dataStr = JSON.stringify(data);
+
+        // 🚫 NO FLICKER: Skip DOM rebuild if data hasn't changed
+        if(dataStr === lastSOSDataStr){
+            return;
+        }
+        lastSOSDataStr = dataStr;
+
+        container.innerHTML = "";
+
+        if(!data || data.length === 0){
+            document.getElementById("radarStatus").innerText = "📡 Scanning for Local Emergencies...";
+            document.getElementById("radarStatus").style.color = "#475569";
+            document.getElementById("radarStatus").style.borderColor = "#cbd5e1";
+            document.getElementById("radarStatus").style.background = "#f1f5f9";
+            container.innerHTML = `
+                <div style="padding:40px 20px; text-align:center; color:#64748b; font-weight:600;">
+                    Sector clear. No active emergencies in your region.
+                </div>
+            `;
+            markersLayer.clearLayers();
+            return;
+        }
+
+        // Radar Alert UI
+        document.getElementById("radarStatus").innerText = `🚨 ${data.length} ACTIVE EMERGENCY DETECTED!`;
+        document.getElementById("radarStatus").style.color = "#dc2626";
+        document.getElementById("radarStatus").style.borderColor = "#fecaca";
+        document.getElementById("radarStatus").style.background = "#fef2f2";
+
+        markersLayer.clearLayers();
+
+        data.forEach(sos => {
+            const card = document.createElement("div");
+            card.className = "sos-card";
+
+            card.innerHTML = `
+                <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                    <div><b>Victim:</b> <br><span class="data">${sos.patient_name}</span></div>
+                    ${!sos.is_for_self ? `<div style="background:#f59e0b; color:black; font-size:10px; padding:3px 6px; border-radius:4px; font-weight:800; height:fit-content;">3RD PARTY REPORT</div>` : ''}
+                </div>
+                <div style="margin-bottom:10px;"><b>Emergency:</b> <br><span class="data" style="color:#ef4444;">${sos.emergency}</span></div>
+                
+                <hr style="border:none; border-top:1px solid #334155; margin:15px 0;">
+                
+                <div style="display:flex; justify-content:space-between;">
+                    <div><b>Distance:</b> <br><span class="data">${sos.distance} km</span></div>
+                    <div><b>Radar:</b> <br><span class="data">${sos.radius} km</span></div>
+                    <div><b>Time:</b> <br><span class="data">${sos.time}s</span></div>
+                </div>
+
+                <button class="btn-accept" onclick="acceptSOS(${sos.id}, ${sos.lat}, ${sos.lng}, '${sos.patient_name}')">
+                    DISPATCH AMBULANCE
+                </button>
+            `;
+
+            container.appendChild(card);
+
+            // 🗺️ PLOT ON LEAFLET MAP
+            const marker = L.circleMarker([sos.lat, sos.lng], {
+                radius: 8,
+                fillColor: "#ef4444",
+                color: "#fca5a5",
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.8
+            }).addTo(markersLayer);
+            
+            marker.bindPopup(`<b style="color:black;">${sos.patient_name}</b><br>${sos.emergency}`);
+        });
+        
+        // Auto-center on nearest SOS
+        if(data.length > 0) {
+            dispatchMap.setView([data[0].lat, data[0].lng], 13);
+        }
+
+    } catch (error) {
+        console.error("Error loading SOS:", error);
+        container.innerHTML = `<div style="color:#ef4444;">Server error locking radar.</div>`;
+    }
+}
+
+
+// 🔥 ACCEPT SOS (FINAL VERSION)
+async function acceptSOS(request_id, lat, lng, patientName){
+
+    const hospital_id = sessionStorage.getItem("hospital_id");
+
+    if(!hospital_id){
+        alert("Hospital not logged in");
+        return;
+    }
+
+    try {
+
+        const res = await medconnectFetch(`/hospital/accept/${request_id}/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                hospital_id: hospital_id
+            })
+        });
+
+        const data = await res.json();
+
+        if(res.ok){
+
+            if(window.sosInterval) clearInterval(window.sosInterval);
+
+            // Clean Sidebar
+            document.getElementById("radarStatus").innerText = "✔️ DISPATCH EN ROUTE";
+            document.getElementById("radarStatus").style.color = "#16a34a";
+            document.getElementById("radarStatus").style.borderColor = "#bbf7d0";
+            document.getElementById("radarStatus").style.background = "#f0fdf4";
+
+            document.getElementById("sosList").innerHTML = `
+                <div style="background:#ffffff; padding:20px; border-radius:12px; border:2px solid #10b981; margin-top:20px;">
+                    <h3 style="color:#10b981; margin-top:0; margin-bottom:15px; font-weight:700;">AMBULANCE DISPATCHED 🚑</h3>
+                    <p style="color:#334155; font-weight:600; margin-bottom:5px;">Victim: <span style="color:#0f172a;">${data.patient_name}</span></p>
+                    <p style="color:#334155; font-size:14px; margin-bottom:5px;">Contact: <span style="color:#0f172a;">${data.phone}</span></p>
+                    <p style="color:#dc2626; font-weight:700; margin-top:10px;">Emergency: ${data.emergency}</p>
+                </div>
+            `;
+
+            // Draw Route on Map
+            markersLayer.clearLayers();
+            const hospLat = lat + 0.05; // Simulate hospital origin
+            const hospLng = lng + 0.05;
+
+            // Hospital Pin
+            L.marker([hospLat, hospLng]).addTo(markersLayer).bindPopup("<b>Command Center (You)</b>").openPopup();
+            // Patient Pin
+            L.marker([lat, lng]).addTo(markersLayer).bindPopup("<b>Victim Location</b>");
+
+            // Polyline
+            const latlngs = [[hospLat, hospLng], [lat, lng]];
+            L.polyline(latlngs, {color: '#10b981', weight: 4, dashArray: '5, 5'}).addTo(markersLayer);
+            dispatchMap.fitBounds(latlngs, {padding: [50, 50]});
+
+        } else {
+            alert(data.error || "Error assigning patient");
+        }
+
+    } catch (error){
+        alert("Server error locking dispatch.");
+    }
+}
+
+// Boot Sequence
+initMap();
+loadSOS();
+
+// 🔥 SILENT RADIUS POLLING (No flicker)
+window.sosInterval = setInterval(loadSOS, 5000);
+
+// 🚀 REAL-TIME WEBSOCKETS (Zero-latency Sync)
+const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+const wsUrl = `${wsProtocol}://127.0.0.1:8001/ws/emergency/`;
+const emergencySocket = new WebSocket(wsUrl);
+
+emergencySocket.onmessage = function(e) {
+    const payload = JSON.parse(e.data);
+    if(payload.action === "NEW_SOS"){
+        // 🎙️ HTML5 Voice Announcer
+        if ('speechSynthesis' in window) {
+            const msg = new SpeechSynthesisUtterance("Flash Override: New emergency detected in sector.");
+            msg.rate = 1.1; msg.pitch = 0.9;
+            window.speechSynthesis.speak(msg);
+        }
+    }
+    
+    if(payload.action === "NEW_SOS" || payload.action === "SOS_ASSIGNED"){
+        setTimeout(() => {
+            loadSOS();
+        }, 300);
+    }
+};
+
+emergencySocket.onopen = function(e) {
+    console.log("🟢 WebSockets Connected - Real-Time Sync Active");
+};
+
+emergencySocket.onclose = function(e) {
+    console.error("🔴 WebSockets Disconnected");
+};
+
+</script>
 
 </body>
 </html>

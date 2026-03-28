@@ -174,9 +174,9 @@ body{
 
     <h2>User Portal Login</h2>
 
-    <input type="email" placeholder="Enter Email">
+    <input type="email" id="email" placeholder="Enter Email">
 
-    <input type="password" placeholder="Enter Password">
+    <input type="password" id="password" placeholder="Enter Password">
 
     <button class="login-btn" onclick="loginUser()">
         Login to Dashboard
@@ -192,12 +192,54 @@ body{
 
 </div>
 
+<script src="../js/api-config.js"></script>
 <script>
 
-function loginUser(){
+async function loginUser(){
 
-    window.location.href="dashboard.html";
+    const data = {
+        email: document.querySelector('input[type="email"]').value,
+        password: document.querySelector('input[type="password"]').value
+    };
+    // #region agent log
+    fetch('http://127.0.0.1:7335/ingest/9d10bee9-2430-4471-b0be-893509ed00ae',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'1dca52'},body:JSON.stringify({sessionId:'1dca52',runId:'run-1',hypothesisId:'H3',location:'user/user-login.html:204',message:'loginUser invoked',data:{emailProvided:!!data.email,passwordProvided:!!data.password},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion
 
+    try {
+
+        const response = await medconnectFetch("/user/login/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        // #region agent log
+        fetch('http://127.0.0.1:7335/ingest/9d10bee9-2430-4471-b0be-893509ed00ae',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'1dca52'},body:JSON.stringify({sessionId:'1dca52',runId:'run-1',hypothesisId:'H2',location:'user/user-login.html:218',message:'login response parsed',data:{status:response.status,ok:response.ok,hasUserId:!!result.user_id,hasError:!!result.error},timestamp:Date.now()})}).catch(()=>{});
+        // #endregion
+
+        if (response.ok && result.user_id) {
+
+            alert("✅ Login Successful!");
+
+            // store user id (for future use like SOS)
+            localStorage.setItem("user_id", result.user_id);
+
+            window.location.href = "dashboard.html";
+
+        } else {
+            alert(`❌ ${result.error || "Invalid Email or Password"}`);
+        }
+
+    } catch (error) {
+        // #region agent log
+        fetch('http://127.0.0.1:7335/ingest/9d10bee9-2430-4471-b0be-893509ed00ae',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'1dca52'},body:JSON.stringify({sessionId:'1dca52',runId:'run-1',hypothesisId:'H1',location:'user/user-login.html:236',message:'login flow exception',data:{errorName:error?.name||'unknown'},timestamp:Date.now()})}).catch(()=>{});
+        // #endregion
+        console.error(error);
+        alert("⚠️ Could not connect to backend. Start Django server on port 8001 or 8000.");
+    }
 }
 
 </script>
