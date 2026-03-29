@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Command Center | MedConnect Dispatch</title>
+<title>Hospital Portal Dashboard | MedConnect</title>
 
 <!-- GOOGLE FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,13 +23,12 @@ min-height: 100vh;
 
 .nav {
     background: #ffffff;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
     color: #0f172a;
-    padding: 10px 5%;
+    padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     position: sticky;
     top: 0;
     z-index: 1100;
@@ -42,56 +41,43 @@ min-height: 100vh;
 }
 
 .nav-brand-box img {
-    height: 85px;
+    height: 70px;
     width: auto;
 }
 
 .nav-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 800;
     color: #0f172a;
 }
 
-.nav span {
-color: #dc2626;
-font-size: 14px;
-font-weight: 700;
-text-transform: uppercase;
-letter-spacing: 1px;
-}
-
 .dashboard-wrapper {
 display: flex;
-height: calc(100vh - 61px);
+min-height: calc(100vh - 101px);
 }
 
 .sidebar {
-width: 450px;
+width: 380px;
 background: #ffffff;
 border-right: 1px solid #e2e8f0;
-padding: 24px;
-overflow-y: auto;
+padding: 30px 20px;
+display: flex;
+flex-direction: column;
 }
 
-.map-container {
+.main-content {
 flex: 1;
-background: #e2e8f0;
-position: relative;
+padding: 40px;
+background: #f8fafc;
 }
 
-#dispatchMap {
-width: 100%;
-height: 100%;
-}
-
-.pulse-alert {
-background: #fef2f2;
-border: 1px solid #fecaca;
-color: #dc2626;
-padding: 16px;
-border-radius: 8px;
-font-weight: 600;
-margin-bottom: 20px;
+.radar-header {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 20px 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f1f5f9;
 }
 
 .sos-card{
@@ -100,42 +86,36 @@ border: 1px solid #e2e8f0;
 padding: 20px;
 border-radius: 12px;
 margin-bottom: 15px;
-box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-transition: all 0.2s ease;
+transition: all 0.2s;
 }
 
-.sos-card:hover {
-border-color: #93c5fd;
-box-shadow: 0 10px 15px rgba(0,0,0,0.05);
-}
-
-.sos-card b {
+.sos-card .label {
 color: #64748b;
 font-weight: 600;
-font-size: 14px;
+font-size: 12px;
 text-transform: uppercase;
-letter-spacing: 0.5px;
+margin-bottom: 4px;
 }
 
-.sos-card span.data {
+.sos-card .value {
 color: #0f172a;
-font-size: 16px;
+font-size: 15px;
 font-weight: 700;
+margin-bottom: 10px;
 }
 
 .btn-accept {
 width: 100%;
-margin-top:20px;
-padding:14px;
+padding: 14px;
 border:none;
 background:#dc2626;
 color:white;
-border-radius:8px;
+border-radius:10px;
 cursor:pointer;
-font-family: 'Inter', sans-serif;
 font-weight: 700;
-font-size: 16px;
-transition: background 0.2s;
+font-size: 15px;
+transition: opacity 0.2s;
+margin-top: 10px;
 }
 
 .btn-accept:hover {
@@ -160,53 +140,57 @@ border-radius: 12px;
 min-width: 120px;
 text-align: center;
 }
-.facility-overview {
-    margin-top: 25px;
-    padding: 20px;
-    background: #f8fafc;
-    border-radius: 12px;
-    border: 1px dashed #cbd5e1;
+/* Clinical Dashboard Panels */
+.case-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
 }
 
-.facility-overview h3 {
-    font-size: 14px;
+.clinical-panel {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.clinical-panel h2 {
+    margin: 0 0 20px 0;
+    font-size: 18px;
     color: #475569;
-    margin-top: 0;
-    margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    border-bottom: 2px solid #f8fafc;
+    padding-bottom: 10px;
 }
 
-.metric-row {
+.clinical-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
-    font-size: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f1f5f9;
 }
 
-.metric-row span:first-child {
+.clinical-row:last-child {
+    border-bottom: none;
+}
+
+.clinical-row span {
     color: #64748b;
     font-weight: 500;
 }
 
-.metric-row span:last-child {
+.clinical-row strong {
     color: #0f172a;
-    font-weight: 700;
 }
 
-/* Branded Dashboard Accent */
-.dashboard-accent {
-    position: fixed;
-    bottom: -50px;
-    right: -50px;
-    opacity: 0.03;
-    z-index: 0;
-    pointer-events: none;
-    transform: rotate(-15deg);
-}
-
-.dashboard-accent img {
-    width: 400px;
+#map-view {
+    height: 350px;
+    width: 100%;
+    background: #f1f5f9;
+    border-radius: 12px;
+    margin-top: 20px;
 }
 
 </style>
@@ -214,65 +198,66 @@ text-align: center;
 
 <body>
 
-<div class="dashboard-accent">
-    <img src="../images/medconnect-logo.png" alt="">
-</div>
-
 <div class="nav">
     <div class="nav-brand-box">
         <img src="../images/medconnect-logo.png" alt="MedConnect">
         <div class="nav-title" id="hospitalNav">Hospital Command Center</div>
     </div>
-    <span>LIVE RADAR ACTIVE</span>
+    <div id="radarSync" style="font-size:12px; color:#16a34a; font-weight:800; display:flex; align-items:center; gap:8px;">
+        <span style="width:8px; height:8px; background:#16a34a; border-radius:50%; display:inline-block;"></span>
+        RADAR ONLINE
+    </div>
 </div>
 
 <div class="dashboard-wrapper">
     
-    <!-- LEFT PANEL: ALERTS -->
     <div class="sidebar">
-        <h2 style="font-size:20px; margin-top:0; margin-bottom:20px; border-bottom:1px solid #1e293b; padding-bottom:15px;">Active Emergency Radar</h2>
+        <h2 class="radar-header">Live Emergency Radar</h2>
         
-        <div class="pulse-alert" id="radarStatus">
-            📡 Scanning for SOS Beacons...
-        </div>
-
         <div id="sosList"></div>
 
-        <!-- Facility Health Stats -->
-        <div class="facility-overview">
-            <h3>Facility Health</h3>
-            <div class="metric-row">
-                <span>Trauma Team Alpha</span>
-                <span style="color:#16a34a;">READY</span>
-            </div>
-            <div class="metric-row">
-                <span>Blood Supply (O-)</span>
-                <span>4.2 Units</span>
-            </div>
-            <div class="metric-row">
-                <span>Oxygen Reserves</span>
-                <span>94%</span>
-            </div>
-            <div class="metric-row">
-                <span>Diagnostic Bay</span>
-                <span style="color:#ea580c;">BUSY</span>
-            </div>
+        <div class="dispatch-history">
+            <h3 style="font-size:14px; color:#64748b; margin-bottom:15px;">Today's Dispatches</h3>
+            <div id="historyList"></div>
         </div>
     </div>
 
-    <!-- RIGHT PANEL: MAP & STATS -->
-    <div class="map-container">
-        <div id="dispatchMap"></div>
+    <div class="main-content">
+        <!-- MODE 1: SCANNING (RADAR MAP) -->
+        <div id="radarView" style="height: 100%;">
+            <div id="dispatchMap" style="height: 100%; border-radius: 16px; border: 1px solid #e2e8f0;"></div>
+        </div>
 
-        <div class="stats-overlay">
-            <div class="stat-box">
-                <div class="title">Total Beds</div>
-                <div class="value" id="statTotalBeds">-</div>
+        <!-- MODE 2: DIAGNOSTIC (ACTIVE CASE) -->
+        <div id="diagnosticView" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px;">
+                <div>
+                    <h1 id="activePatientName" style="margin:0; font-size:32px; font-weight:800; color:#0f172a;">-</h1>
+                    <p style="margin:5px 0 0 0; color:#64748b; font-weight:600;">DISPATCH ACTIVE • AMBULANCE EN ROUTE</p>
+                </div>
+                <button onclick="resolveSOS()" style="padding:12px 24px; background:#16a34a; color:white; border:none; border-radius:8px; font-weight:700; cursor:pointer;">
+                    RESOLVE EMERGENCY
+                </button>
             </div>
-            <div class="stat-box">
-                <div class="title">ICU Available</div>
-                <div class="value" id="statIcuBeds">-</div>
+
+            <div class="case-grid">
+                <div class="clinical-panel">
+                    <h2>Patient Clinical Profile</h2>
+                    <div class="clinical-row"><span>Patient Age</span> <strong id="pAge">-</strong></div>
+                    <div class="clinical-row"><span>Blood Group</span> <strong id="pBlood">-</strong></div>
+                    <div class="clinical-row"><span>Institutional Contact</span> <strong id="pPhone">-</strong></div>
+                    <div class="clinical-row"><span>Emergency Contact</span> <strong id="pEContact">-</strong></div>
+                </div>
+
+                <div class="clinical-panel">
+                    <h2>EHR & Medical History</h2>
+                    <div class="clinical-row"><span>Known Conditions</span> <strong id="pCondition">-</strong></div>
+                    <div class="clinical-row"><span>Allergies</span> <strong id="pAllergies" style="color:#dc2626;">-</strong></div>
+                    <div class="clinical-row"><span>Emergency Nature</span> <strong id="pEmergency" style="color:#ef4444;">-</strong></div>
+                </div>
             </div>
+
+            <div id="map-view"></div>
         </div>
     </div>
 
@@ -306,27 +291,9 @@ async function loadSOS(){
         document.getElementById("hospitalNav").innerText = hospital_name + " Dispatch Center";
     }
 
-    const totalBeds = sessionStorage.getItem("total_beds") || "N/A";
-    const icuBeds = sessionStorage.getItem("icu_beds") || "N/A";
-    document.getElementById("statTotalBeds").innerText = totalBeds;
-    document.getElementById("statIcuBeds").innerText = icuBeds;
-
     const container = document.getElementById("sosList");
 
     if(!hospital_id){
-        container.innerHTML = `
-            <div style="
-                margin:20px auto;
-                padding:20px;
-                width:400px;
-                background:#fef3c7;
-                border-radius:12px;
-                color:#92400e;
-                font-weight:500;
-            ">
-                ⚠️ Hospital not logged in
-            </div>
-        `;
         return;
     }
 
@@ -334,12 +301,8 @@ async function loadSOS(){
 
         const res = await medconnectFetch("/hospital/sos/", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                hospital_id: hospital_id
-            })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ hospital_id: hospital_id })
         });
 
         const data = await res.json();
@@ -351,50 +314,39 @@ async function loadSOS(){
         }
         lastSOSDataStr = dataStr;
 
+        // 🧹 CLEAR PREVIOUS STATE
         container.innerHTML = "";
+        markersLayer.clearLayers();
 
         if(!data || data.length === 0){
-            document.getElementById("radarStatus").innerText = "📡 Scanning for Local Emergencies...";
-            document.getElementById("radarStatus").style.color = "#475569";
-            document.getElementById("radarStatus").style.borderColor = "#cbd5e1";
-            document.getElementById("radarStatus").style.background = "#f1f5f9";
             container.innerHTML = `
                 <div style="padding:40px 20px; text-align:center; color:#64748b; font-weight:600;">
-                    Sector clear. No active emergencies in your region.
+                    📡 Sector clear. <br>Scanning for SOS beacons...
                 </div>
             `;
-            markersLayer.clearLayers();
             return;
         }
-
-        // Radar Alert UI
-        document.getElementById("radarStatus").innerText = `🚨 ${data.length} ACTIVE EMERGENCY DETECTED!`;
-        document.getElementById("radarStatus").style.color = "#dc2626";
-        document.getElementById("radarStatus").style.borderColor = "#fecaca";
-        document.getElementById("radarStatus").style.background = "#fef2f2";
-
-        markersLayer.clearLayers();
 
         data.forEach(sos => {
             const card = document.createElement("div");
             card.className = "sos-card";
 
             card.innerHTML = `
-                <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                    <div><b>Victim:</b> <br><span class="data">${sos.patient_name}</span></div>
-                    ${!sos.is_for_self ? `<div style="background:#f59e0b; color:black; font-size:10px; padding:3px 6px; border-radius:4px; font-weight:800; height:fit-content;">3RD PARTY REPORT</div>` : ''}
-                </div>
-                <div style="margin-bottom:10px;"><b>Emergency:</b> <br><span class="data" style="color:#ef4444;">${sos.emergency}</span></div>
+                <div class="label">Patient Name</div>
+                <div class="value">${sos.patient_name}</div>
                 
-                <hr style="border:none; border-top:1px solid #334155; margin:15px 0;">
-                
-                <div style="display:flex; justify-content:space-between;">
-                    <div><b>Distance:</b> <br><span class="data">${sos.distance} km</span></div>
-                    <div><b>Radar:</b> <br><span class="data">${sos.radius} km</span></div>
-                    <div><b>Time:</b> <br><span class="data">${sos.time}s</span></div>
+                <div class="label">Primary Contact</div>
+                <div class="value">${sos.patient_phone}</div>
+
+                <div class="label">Emergency Details</div>
+                <div class="value" style="color:#dc2626;">${sos.emergency}</div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:15px;">
+                    <span style="font-size:12px; font-weight:600; color:#64748b;">📍 ${sos.distance} KM</span>
+                    <span style="font-size:12px; font-weight:600; color:#64748b;">⏳ ${sos.time}s AGO</span>
                 </div>
 
-                <button class="btn-accept" onclick="acceptSOS(${sos.id}, ${sos.lat}, ${sos.lng}, '${sos.patient_name}')">
+                <button class="btn-accept" onclick="acceptSOS(${sos.id}, ${sos.lat}, ${sos.lng})">
                     DISPATCH AMBULANCE
                 </button>
             `;
@@ -403,7 +355,7 @@ async function loadSOS(){
 
             // 🗺️ PLOT ON LEAFLET MAP
             const marker = L.circleMarker([sos.lat, sos.lng], {
-                radius: 8,
+                radius: 10,
                 fillColor: "#ef4444",
                 color: "#fca5a5",
                 weight: 2,
@@ -426,71 +378,71 @@ async function loadSOS(){
 }
 
 
-// 🔥 ACCEPT SOS (FINAL VERSION)
-async function acceptSOS(request_id, lat, lng, patientName){
+// 🔥 OVERHAULED ACCEPT SOS
+async function acceptSOS(request_id, lat, lng){
 
     const hospital_id = sessionStorage.getItem("hospital_id");
 
-    if(!hospital_id){
-        alert("Hospital not logged in");
-        return;
-    }
-
     try {
-
         const res = await medconnectFetch(`/hospital/accept/${request_id}/`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                hospital_id: hospital_id
-            })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ hospital_id: hospital_id })
         });
 
         const data = await res.json();
 
         if(res.ok){
-
             if(window.sosInterval) clearInterval(window.sosInterval);
 
-            // Clean Sidebar
-            document.getElementById("radarStatus").innerText = "✔️ DISPATCH EN ROUTE";
-            document.getElementById("radarStatus").style.color = "#16a34a";
-            document.getElementById("radarStatus").style.borderColor = "#bbf7d0";
-            document.getElementById("radarStatus").style.background = "#f0fdf4";
-
+            // 1. SWITCH UI MODE
+            document.getElementById("radarView").style.display = "none";
+            document.getElementById("diagnosticView").style.display = "block";
             document.getElementById("sosList").innerHTML = `
-                <div style="background:#ffffff; padding:20px; border-radius:12px; border:2px solid #10b981; margin-top:20px;">
-                    <h3 style="color:#10b981; margin-top:0; margin-bottom:15px; font-weight:700;">AMBULANCE DISPATCHED 🚑</h3>
-                    <p style="color:#334155; font-weight:600; margin-bottom:5px;">Victim: <span style="color:#0f172a;">${data.patient_name}</span></p>
-                    <p style="color:#334155; font-size:14px; margin-bottom:5px;">Contact: <span style="color:#0f172a;">${data.phone}</span></p>
-                    <p style="color:#dc2626; font-weight:700; margin-top:10px;">Emergency: ${data.emergency}</p>
+                <div style="background:#f0fdf4; color:#16a34a; padding:15px; border-radius:10px; font-weight:700; text-align:center;">
+                    🚑 AMBULANCE EN ROUTE
                 </div>
             `;
 
-            // Draw Route on Map
-            markersLayer.clearLayers();
-            const hospLat = lat + 0.05; // Simulate hospital origin
-            const hospLng = lng + 0.05;
+            // 2. HYDRATE CLINICAL DATA (REAL-TIME TRANSFER)
+            const clinicalRes = await medconnectFetch(`/sos/details/${request_id}/`);
+            const clinical = await clinicalRes.json();
 
-            // Hospital Pin
-            L.marker([hospLat, hospLng]).addTo(markersLayer).bindPopup("<b>Command Center (You)</b>").openPopup();
-            // Patient Pin
-            L.marker([lat, lng]).addTo(markersLayer).bindPopup("<b>Victim Location</b>");
+            document.getElementById("activePatientName").innerText = clinical.name;
+            document.getElementById("pAge").innerText = clinical.age || "N/A";
+            document.getElementById("pBlood").innerText = clinical.blood_group || "N/A";
+            document.getElementById("pPhone").innerText = clinical.phone || "N/A";
+            document.getElementById("pEContact").innerText = clinical.emergency_contact || "N/A";
+            document.getElementById("pCondition").innerText = clinical.medical_condition || "None Reported";
+            document.getElementById("pAllergies").innerText = clinical.allergies || "None";
+            document.getElementById("pEmergency").innerText = clinical.emergency_type;
 
-            // Polyline
-            const latlngs = [[hospLat, hospLng], [lat, lng]];
-            L.polyline(latlngs, {color: '#10b981', weight: 4, dashArray: '5, 5'}).addTo(markersLayer);
-            dispatchMap.fitBounds(latlngs, {padding: [50, 50]});
+            // 3. MAP TRACING
+            const diagMap = L.map('map-view').setView([lat, lng], 14);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(diagMap);
+            L.marker([lat, lng]).addTo(diagMap).bindPopup("<b>Victim Real-Time Location</b>").openPopup();
+
+            // Store ID for resolve
+            window.activeCaseId = request_id;
 
         } else {
-            alert(data.error || "Error assigning patient");
+            alert(data.error);
         }
-
     } catch (error){
-        alert("Server error locking dispatch.");
+        console.error(error);
     }
+}
+
+async function resolveSOS(){
+    if(!window.activeCaseId) return;
+    try {
+        await medconnectFetch(`/sos/resolve/${window.activeCaseId}/`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user_id: localStorage.getItem("user_id") || 1 }) // Dummy user id just to fulfill API requirement
+        });
+        location.reload();
+    } catch(e){ alert("Resolve failed"); }
 }
 
 // Boot Sequence

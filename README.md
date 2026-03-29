@@ -45,11 +45,12 @@ MedConnect implements a **"Zero-Knowledge Dispatch"** protocol to protect Patien
 *   **Emergency Circle**: Management of primary and secondary emergency contacts for automated notifications.
 *   **Third-Party Victim Reporting**: Users can report emergencies for others (e.g., a witness at a crash site) using the `is_for_self` toggle.
 
-#### 2. Provider Portal (Clinical Command Center)
+#### 2. Hospital Portal (Clinical Command Center)
 *   **Live SOS Dashboard**: Real-time ticker of inbound emergency requests with distance and estimated arrival times.
+*   **Accepted Patient Profile**: Reveals critical EHR context (blood type, allergies) only after a formal dispatch acceptance.
+*   **Dispatch History**: Real-time log of managed emergencies for clinical auditing.
 *   **Emergency Lifecycle Management**: Includes the "Resolve" state to formally close emergency cases after stabilization.
-*   **Clinical Data Access**: Instant access to patient medical context upon dispatch acceptance.
-*   **Hospital Bed Management**: Real-time tracking of `Total Beds` vs. `ICU Beds` to determine trauma capacity.
+*   **Hospital Bed Management**: Real-time tracking of `Total Beds` vs. `ICU Beds`.
 
 ---
 
@@ -80,7 +81,7 @@ The platform utilizes a **Clinical Aesthetic** designed for high-stress environm
 ```text
 ├── root files           # Landing page (index.html), Hospitals, About, SOS
 ├── user/                # Patient Hub & EHR Management
-├── hospital/            # Provider Command Center
+├── hospital/            # Hospital Portal Dashboard
 ├── admin/               # Site Administration & Audit
 ├── medconnect_backend/  # Django Core API & Business Logic
 ├── css/                 # Global Clinical Design System

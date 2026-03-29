@@ -329,6 +329,7 @@ def get_sos_details(request, request_id):
             "name": target_name,
             "phone": target_phone,
             "blood_group": user.blood_group if is_for_self else "Unknown",
+            "age": user.age if is_for_self else "Unknown",
             "medical_condition": user.medical_condition if is_for_self else "Unknown",
             "allergies": user.allergies if is_for_self else "Unknown",
             "emergency_contact": user.emergency_contact_number if is_for_self else user.contact_number,
@@ -391,11 +392,11 @@ def get_hospital_sos(request):
 
                 visible_requests.append({
                     "id": sos.id,
-                    "patient_name": "Identity Protected (HIPAA)",
-                    "patient_phone": "Hidden for Privacy",
+                    "patient_name": sos.user.first_name if is_for_self else sos.third_party_name,
+                    "patient_phone": sos.user.contact_number if is_for_self else sos.third_party_phone,
                     "emergency": target_condition or sos.emergency_type,
                     "is_for_self": is_for_self,
-                    "caller_name": None,
+                    "caller_name": sos.user.first_name if not is_for_self else None,
                     "lat": sos.latitude,
                     "lng": sos.longitude,
                     "distance": distance,

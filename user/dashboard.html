@@ -304,12 +304,19 @@ border: 1px solid #e2e8f0;
 }
 
 .health-insights {
-    margin-top: 30px;
+    margin-top: 40px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 30px; /* Enhanced spatial separation */
 }
 
+/* Card Image Consistency */
+.trust-image-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #f1f5f9;
+}
 /* Branded Dashboard Accent */
 .dashboard-accent {
     position: fixed;
@@ -336,7 +343,6 @@ border: 1px solid #e2e8f0;
 </div>
 
 <a href="dashboard.html" class="active">🏠 Dashboard</a>
-<a href="sos.html">🚨 Emergency SOS</a>
 <a href="alert-history.html">📋 Alert History</a>
 <a href="profile.html">👤 Medical Profile</a>
 <a href="contacts.html">📞 Emergency Contacts</a>
