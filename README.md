@@ -99,4 +99,4 @@ The platform utilizes a **Clinical Aesthetic** designed for high-stress environm
 *   **Regulatory Compliance**: National Telemedicine Practice Guidelines (2025).
 
 ---
-*Created by Devansh Kalwani for the MedConnect-Emergency-Healthcare-System.*
+*Created by Devansh Kalwani and Arya for the MedConnect-Emergency-Healthcare-System.*
